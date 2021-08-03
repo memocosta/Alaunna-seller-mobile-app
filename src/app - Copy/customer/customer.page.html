@@ -1,0 +1,204 @@
+<ion-button routerLink="/contact-list">
+  <ion-icon name="arrow-back"></ion-icon>
+  <ion-text class="text">بيانات العميل</ion-text>
+</ion-button>
+<ion-content>
+  <ng-container>
+    <ng-container>
+      <ion-card color="light">
+        <ion-card-content class="ion-no-padding">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="12" class="ion-text-right">
+                <ion-text style="display: block">
+                  يمكنك تلقي الطلبات هنا ! 
+                </ion-text>
+              </ion-col>
+              <ion-col size="12" class="ion-text-right">
+                <ion-text style="display: block;margin-bottom: 18px;">
+                  كما يمكنك إنشاء طلبات لعملائك على الااونا أو عميل جديد 
+                </ion-text>
+              </ion-col>
+              <ion-col size="12" class="ion-text-right">
+                <ion-button class="button" routerLink="/new-customer" color="success">
+                  <ion-icon name="add"></ion-icon>
+                  إنشاء طلب لعمیل
+                </ion-button>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
+  </ng-container>
+  <ion-content>
+    <ion-row>
+      <ion-col class="order">
+        <div >كل الطلبات</div>
+      </ion-col>
+      <ion-col>
+        <div>
+          <ion-list>
+            <ion-item>
+              <ion-label>فلتر</ion-label>
+              <ion-select interface="popover">
+                <ion-select-option value="nes">في الانتظار</ion-select-option>
+                <ion-select-option value="n64">جديد</ion-select-option>
+                <ion-select-option value="ps">جاهز</ion-select-option>
+                <ion-select-option value="genesis">جاري التوصيل </ion-select-option>
+                <ion-select-option value="saturn">مكتمل </ion-select-option>
+                <ion-select-option value="snes">ملغي</ion-select-option>
+                <ion-select-option value="snes">مسترجع</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>
+        </div>
+      </ion-col>
+    </ion-row>
+
+<ng-container>
+  <ng-container>
+    <ion-card color="light">
+      <ion-card-content class="ion-no-padding">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12" class="ion-text-right">
+              <ion-text style="display: block">
+                العميل : <ion-text> عميل
+                  بهاء عادل</ion-text>
+              </ion-text>
+            </ion-col>
+            <ion-col size="12" class="ion-text-right">
+              <ion-text style="display: block">
+                رقم الهاتف : <ion-text>
+                  01270569568</ion-text>
+              </ion-text>
+            </ion-col>
+            <ion-col size="12" class="ion-text-right">
+              <ion-text style="display: block">
+                العنوان : <ion-text>
+                  اسكندريه - سيدي جابر</ion-text>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+</ng-container>
+<!---->
+<ion-content class="myorders-page">
+  <ng-container>
+    <ng-container>
+      <ion-card color="light">
+        <ion-card-content class="ion-no-padding">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="12" class="ion-text-right">
+                <ion-text style="display: block">
+                  الطلبات :
+                </ion-text>
+              </ion-col>
+              <ion-item>
+                <ion-col size="12" class="ion-text-right">
+                  <ion-text style="display: block">
+                    طلب رقم
+                    <ion-text style="color:#7d2468">201</ion-text>
+                    <ion-text style="margin-right: 60px;"> 600 EGP
+                    </ion-text>
+                    <ion-text style="margin-right: 20px;color:#7d2468
+                     ">
+                      في الانتظار</ion-text>
+                  </ion-text>
+                  <ion-col style="font-size: medium;">
+                    <ion-text>22-6-2020 , 7:43 PM</ion-text>
+                  </ion-col>
+                </ion-col>
+              </ion-item>
+              <ion-item>
+
+                <ion-col size="12" class="ion-text-right">
+                  <ion-text style="display: block">
+                    طلب رقم <ion-text style="color:#7d2468">201</ion-text>
+                    <ion-text style="margin-right: 60px;"> 600 EGP
+                    </ion-text>
+                    <ion-text style="margin-right: 20px;color:#7d2468
+                     ">
+                      جديد </ion-text>
+                  </ion-text>
+                  <ion-col style="font-size: medium;">
+                    <ion-text>22-6-2020 , 7:43 PM</ion-text>
+                  </ion-col>
+                </ion-col>
+              </ion-item>
+              <ion-item>
+                <ion-col size="12" class="ion-text-right">
+                  <ion-text style="display: block">
+                    طلب رقم <ion-text style="color:#7d2468">201</ion-text>
+                    <ion-text style="margin-right: 60px;"> 600 EGP
+                    </ion-text>
+                    <ion-text style="margin-right: 20px;color:yellow
+                     ">
+                      جاهز </ion-text>
+                  </ion-text>
+                  <ion-col style="font-size: medium;">
+                    <ion-text>22-6-2020 , 7:43 PM</ion-text>
+                  </ion-col>
+                </ion-col>
+              </ion-item>
+              <ion-item>
+
+                <ion-col size="12" class="ion-text-right">
+                  <ion-text style="display: block">
+                    طلب رقم <ion-text style="color:#7d2468">201</ion-text>
+                    <ion-text style="margin-right: 60px;"> 600 EGP
+                    </ion-text>
+                    <ion-text style="margin-right: 20px;color:green
+                     ">
+                      مكتمل </ion-text>
+                  </ion-text>
+                  <ion-col style="font-size: medium;">
+                    <ion-text>22-6-2020 , 7:43 PM</ion-text>
+                  </ion-col>
+                </ion-col>
+              </ion-item>
+              <ion-item>
+
+                <ion-col size="12" class="ion-text-right">
+                  <ion-text style="display: block">
+                    طلب رقم <ion-text style="color:#7d2468">201</ion-text>
+                    <ion-text style="margin-right: 60px;"> 600 EGP
+                    </ion-text>
+                    <ion-text style="margin-right: 20px;color:red
+                     ">
+                      طلب ملغي </ion-text>
+                  </ion-text>
+                  <ion-col style="font-size: medium;">
+                    <ion-text>22-6-2020 , 7:43 PM</ion-text>
+                  </ion-col>
+                </ion-col>
+              </ion-item>
+              <ion-item>
+
+                <ion-col size="12" class="ion-text-right">
+                  <ion-text style="display: block">
+                    طلب رقم <ion-text style="color:#7d2468">201</ion-text>
+                    <ion-text style="margin-right: 60px;"> 600 EGP
+                    </ion-text>
+                    <ion-text style="margin-right: 20px;color: red;
+                     ">
+                      مسترجع </ion-text>
+                  </ion-text>
+                  <ion-col style="font-size: medium;">
+                    <ion-text>22-6-2020 , 7:43 PM</ion-text>
+                  </ion-col>
+                </ion-col>
+              </ion-item>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
+  </ng-container>
+</ion-content>
+<!---->

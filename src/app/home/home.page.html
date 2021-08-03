@@ -1,0 +1,147 @@
+<ion-header>
+  <ion-toolbar color="grey">
+    <ion-row>
+      <ion-col size="1">
+        <div class="header-icon">
+          <!-- <ion-icon name="menu" color="primary"></ion-icon> -->
+          <ion-menu-button name="menu" color="primary"></ion-menu-button>
+
+        </div>
+      </ion-col>
+      <ion-col size="9">
+        <ion-searchbar placeholder="البحث"></ion-searchbar>
+      </ion-col>
+      <ion-col size="2">
+        <div class="header-icon" routerLink="/notifications">
+          <ion-badge *ngIf="countNotification > 0">{{countNotification}}</ion-badge>
+          <ion-icon name="notifications" color="primary"></ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-slides [options]="slideOpts" *ngIf="banners.length > 0">
+    <ion-slide *ngFor="let banner of banners; index as i">
+      <ion-card class="ion-text-right">
+        <ion-card-title class="ion-padding-horizontal">{{banner.title}}</ion-card-title>
+        <ion-card-content>{{banner.description}}</ion-card-content>
+      </ion-card>
+      <ion-icon name="close" (click)="removeBanner(i)"></ion-icon>
+    </ion-slide>
+  </ion-slides>
+  <ion-card class="welcome-card">
+
+    <img *ngIf="!MarketData.cover || !MarketData.cover.alt " src="/assets/shapes.svg" alt="alaunna market"
+      title="alaunna market" />
+    <img *ngIf="MarketData.cover && MarketData.cover.alt"
+      [src]="ImgeBase + '/' + MarketData.cover.for + '/' + MarketData.cover.name" alt="alaunna market"
+      title="alaunna market" />
+
+    <ion-button class="edit-button" color="light" (click)="OpenImage('cover')">
+      <ion-icon name="create"></ion-icon>
+    </ion-button>
+  </ion-card>
+  
+  <ion-card class="store-info">
+    <ion-card-header>
+      <ion-card-title color="primary"> {{ MarketData.name }} </ion-card-title>
+      <ion-card-subtitle color="success">
+        <ion-icon color="success" name="map"></ion-icon> {{ MarketData.address }}
+      </ion-card-subtitle>
+      <a class="popover-btn" routerLink="/store-info">
+        <ion-icon color="primary" name="create"></ion-icon>
+      </a>
+    </ion-card-header>
+    <a class="share-icon" (click)="share()">
+      <ion-icon color="primary" name="share"></ion-icon>
+    </a>
+  </ion-card>
+  <div class="custom-text" >
+    <a target="_blank" href="https://alaunna.com/markets/details/{{MarketData.id}}">
+    <p color="primary">مشاهدة متجرك علي الموقع</p>
+  </a>
+  </div>
+  <!-- <div class="ion-padding" *ngIf="isLoggedIn === true">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-subtitle>Hi, {{users.name}}</ion-card-subtitle>
+        <ion-card-title>{{users.email}}</ion-card-title>
+      </ion-card-header>
+      <img src="{{users.picture.data.url}}" width="100" alt="{{users.name}}" />
+      <ion-card-content>
+        <p>
+          <ion-button expand="full" color="secondary" (click)="logout()">
+            Logout
+            <ion-icon name="log-out"></ion-icon>
+          </ion-button>
+        </p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+  <div class="ion-padding" >
+    <P>isLoggedIn: {{isLoggedIn}}</P>
+    <P>users: {{users}}</P>
+    <P>users_str: {{users_str}}</P>
+    <P>user_id: {{user_id}}</P>
+    <P>err1: {{err1}}</P>
+    <P>err2: {{err2}}</P>
+    <P>err3: {{err3}}</P>
+  </div>
+  <div class="ion-padding" *ngIf="isLoggedIn === false">
+    <ion-button expand="full" color="secondary" (click)="fbLogin()">
+      Login with
+      <ion-icon name="logo-facebook"></ion-icon>
+    </ion-button>
+  </div> -->
+  <div class="content-page">
+    <ion-grid>
+      <ion-row *ngFor="let product of Products">
+        <ion-col size="4" class="img-container">
+            <img *ngIf="!product.images || !product.images[0]"
+            src="assets/img/WhatsApp Image 2019-09-14 at 3.13.35 PM.png">
+            <img *ngIf="product.images && product.images[0]"
+            [src]="ImgeBase + '/' + product.images[0].for  + '/big/' + product.images[0].name"
+            [alt]="product.images[0].alt">
+            <span *ngIf="product.offer">
+              {{product.offer.title}}</span>
+        </ion-col>
+        <ion-col size="8">
+          <ion-card class="nomargin">
+            <ion-card-header>
+              <ion-card-title> {{ product.name.substr(0 , 20) }} </ion-card-title>
+              <ion-card-subtitle color="primary" dir="rtl">سعر البيع
+                <span *ngIf="product.offer" class="ion-padding-horizontal">{{ (product['market'][0]['Market_Products']['Selling_price']-(product['market'][0]['Market_Products']['Selling_price']*product.offer.value/100)) }} EGP</span>
+                <del *ngIf="product.offer && product.offer.value != 0" >{{ product['market'][0]['Market_Products']['Selling_price'] }} EGP</del>
+                <span *ngIf="!product.offer">{{ product['market'][0]['Market_Products']['Selling_price'] }} EGP</span>
+              </ion-card-subtitle>
+              <ion-card-subtitle *ngIf="product.offer">
+                {{product.offer.title}}
+              </ion-card-subtitle>
+              <ion-card-subtitle *ngIf="product.coupon" class="coupon">
+                <span>خصم {{product.coupon.value}} <span *ngIf="product.coupon.type == 'percent'">%</span><span *ngIf="product.coupon.type == 'money'">جنيه</span> </span> باستخدام كوبون رقم {{product.coupon.code}}
+              </ion-card-subtitle>
+            </ion-card-header>
+            <ion-button class="btn-font-size" color="light" [routerLink]="'/single-product-info/' + product.id ">
+              <ion-icon name="create" color="primary"></ion-icon>
+              <span class="primary-color">تعديل</span>
+            </ion-button>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+      <hr />
+    </ion-grid>
+    <ion-row class="no-products" *ngIf="Products?.length == 0">
+        <h4>
+          لم تقم حتى لأن بأضافة اى منتج لمتجرك
+        </h4>
+        <h5 routerLink="/addproduct">
+          أضف منتجك الاول
+        </h5>
+    </ion-row>
+  </div>
+</ion-content>

@@ -1,0 +1,37 @@
+ion-app{
+    height: auto;
+    overflow-y: auto;
+    display: block;
+}
+ion-button{
+    color: #fff !important;
+    text-align:right;
+    height: 48px;
+    width: 100%;
+}
+ion-icon{
+    padding: 10px;
+    font-size: 28px;
+}
+ion-card{
+    margin-bottom: auto;
+}
+.text{
+    color: #fff;
+    margin-left: auto;
+    color: #fff !important;
+    font-size: 18px;
+}
+// ion-grid{
+//     padding: 39px;
+// }
+.orders{
+    display: inline-block;
+    text-align: center;
+    font-size: 20px;
+}
+.head-order{
+    background: #7d2468;
+    display: flex;
+  align-items: center
+}

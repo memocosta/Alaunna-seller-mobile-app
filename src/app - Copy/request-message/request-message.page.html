@@ -1,0 +1,149 @@
+<ion-app>
+  <ion-button routerLink="/contact-list">
+    <ion-icon name="arrow-back"></ion-icon>
+    <ion-text class="text"> اتمام الطلب</ion-text>
+  </ion-button>
+  <ng-container>
+    <ng-container>
+      <ion-card color="light">
+        <ion-card-content class="ion-no-padding">
+          <ion-grid>
+            <ion-row>
+              <ion-header>
+                <ion-title>
+                  تم انشاء سله الطلب
+                </ion-title>
+              </ion-header>
+              <ion-col size="12" class="ion-text-center">
+                <ion-text style="display: block;font-size: 18px;padding: 16px;">
+                  الان قم بإرسال الرابط التالي لعميلك ليقوم بإكمال الطلب
+                </ion-text>
+              </ion-col>
+              <ion-col>
+                <ion-text href="#">
+                  https://alaunna.com/markets/details/162</ion-text>
+              </ion-col>
+              <ion-col size="12" class="ion-text-center">
+                <ion-text style="font-size: 18px;">ارسل بواسطه</ion-text>
+              </ion-col>
+              <ion-col size="12" class="ion-text-center" style="display: grid;font-size: 18px;">
+                <ion-col style="display: flex;
+                align-items: center;
+                justify-content: center;
+                justify-content: space-between;">
+                  <ion-icon name="logo-whatsapp"></ion-icon>
+                  <ion-icon name="chatboxes"></ion-icon>
+                </ion-col>
+                <ion-col style="display: flex;
+                align-items: center;
+                justify-content: center;
+                justify-content: space-between;">
+                  <ion-text>واتساب</ion-text>
+                  <ion-text> رساله قصيره</ion-text>
+                </ion-col>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
+  </ng-container>
+  <ng-container>
+    <ion-card color="light">
+      <ion-card-content class="ion-no-padding" style="font-size: 20px;">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12" class="ion-text-right">
+              <ion-text style="display: block">
+                العميل : <ion-text> عميل
+                  بهاء عادل</ion-text>
+              </ion-text>
+            </ion-col>
+            <ion-col size="12" class="ion-text-right">
+              <ion-text style="display: block">
+                رقم الهاتف : <ion-text>
+                  01270569568</ion-text>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+  <ion-content class="myorders-page">
+    <ng-container>
+      <ng-container>
+        <ion-card color="light">
+          <ion-card-content class="ion-no-padding" >
+            <ion-grid>
+              <ion-row>
+                <div class="orders">
+                  <ion-item class="orders">
+                    <ion-row>
+                      <ion-col>
+                        <div>
+                          المنتجات
+                        </div>
+                      </ion-col>
+                      <ion-col>
+                        <div>الكميه</div>
+                      </ion-col>
+                      <ion-col>
+                        <div>االسعر</div>
+                      </ion-col>
+                    </ion-row>
+                  </ion-item>
+                  <ion-item class="orders">
+                    <ion-row>
+                      <ion-col>
+                        <div>
+                          <img alt="" class="background" src="assets/img/header.png">
+                        </div>
+                      </ion-col>
+                      <ion-col>
+                        <div>1</div>
+                      </ion-col>
+                      <ion-col>
+                        <div>200</div>
+                      </ion-col>
+                    </ion-row>
+                  </ion-item>
+                  <ion-item class="orders">
+                    <ion-row>
+                      <ion-col>
+                        <div>
+                          <img alt="" class="background" src="assets/img/header.png">
+                        </div>
+                      </ion-col>
+                      <ion-col>
+                        <div>1</div>
+                      </ion-col>
+                      <ion-col>
+                        <div>200</div>
+                      </ion-col>
+                    </ion-row>
+                  </ion-item>
+                 
+                    <ion-row>
+                      <ion-col>
+                        <div>
+                          الاجمالي
+                        </div>
+                      </ion-col>
+                      <ion-col>
+                        <div>2</div>
+                      </ion-col>
+                      <ion-col>
+                        <div>200</div>
+                      </ion-col>
+                    </ion-row>
+                </div>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </ng-container>
+    </ng-container>
+  </ion-content>
+  <!---->
+</ion-app>

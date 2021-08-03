@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-row>
+    <ion-col size="1">
+      <div class="header-icon" style="width: max-content;
+        margin-left: 102px">
+        <ion-menu-button style="margin-right: 75px;" name="menu"></ion-menu-button>
+        <span>
+          خيارات الدفع
+        </span>
+      </div>
+    </ion-col>
+    <ion-col size="9">
+      <!-- <ion-searchbar placeholder="البحث"></ion-searchbar> -->
+    </ion-col>
+    <ion-col size="2">
+      <ion-icon routerLink="/settings" name="arrow-back"></ion-icon>
+    </ion-col>
+  </ion-row>
+</ion-header>
+<ion-grid style="width: 100%;">
+  <ion-row>
+    <ion-col size="10">
+      <ion-text class="text-d">
+        تفعيل خيارات الدفع الإلكتروني
+      </ion-text>
+    </ion-col>
+    <ion-col size="2" class="ion-text-left">
+      <ion-toggle (click)="presentAlert(0)" checked *ngIf="MarketData.online_payment"></ion-toggle>
+      <ion-toggle (click)="presentAlert(1)" *ngIf="!MarketData.online_payment"></ion-toggle>
+    </ion-col>
+  </ion-row>
+  <ion-label style="padding-right: 12px;"> يمكن لعملائك الدفع بإستخدام</ion-label>
+  <ion-row>
+    <ion-card style="width: 100%;">
+      <ion-item lines="none">
+        <ion-label>
+          فوري
+        </ion-label>
+        <ion-img style="width: 80px; height: 80px;" src="../../assets/icon/fawry.png"></ion-img>
+
+
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label>
+          بطاقة الائتمان
+        </ion-label>
+        <ion-img style="width: 80px; height: 80px;" src="../../assets/icon/visa.png"></ion-img>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label>
+          كارت ميزة
+        </ion-label>
+        <ion-img style="width: 80px; height: 80px;" src="../../assets/icon/meza.jpg"></ion-img>
+      </ion-item>
+    </ion-card>
+  </ion-row>
+  <ion-row>
+    <ion-col size="10">
+      <ion-text class="text-d">
+        تفعيل الدفع عند الاستلام
+      </ion-text>
+    </ion-col>
+    <ion-col size="2" class="ion-text-left">
+      <ion-toggle (click)="presentAlert2(0)" checked *ngIf="MarketData.cash_on_delivery"></ion-toggle>
+      <ion-toggle (click)="presentAlert2(1)" *ngIf="!MarketData.cash_on_delivery"></ion-toggle>
+    </ion-col>
+  </ion-row>
+</ion-grid>

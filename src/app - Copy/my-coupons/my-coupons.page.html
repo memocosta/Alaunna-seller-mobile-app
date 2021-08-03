@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-toolbar color="grey">
+    <ion-title color="primary">كوبوناتي</ion-title>
+    <ion-row>
+      <ion-col size="1">
+        <div class="header-icon">
+          <ion-menu-button name="menu" color="primary"></ion-menu-button>
+        </div>
+      </ion-col>
+      <ion-col size="9">
+        <ion-searchbar></ion-searchbar>
+      </ion-col>
+      <ion-col size="2">
+        <div class="header-icon" routerLink="/notifications">
+          <ion-badge *ngIf="countNotification > 0">{{countNotification}}</ion-badge>
+          <ion-icon name="notifications" color="primary"></ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="myoffers">
+  <div *ngIf="coupons?.length>0">
+    <ion-list class="item item-trns" lines="none">
+      <ion-item-sliding color="none" *ngFor="let coupon of coupons">
+        <ion-item color="none">
+          <ion-card color="light">
+            <ion-card-content no-padding>
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="10" [routerLink]="['/single-coupon/' + coupon.id]">
+                    <ion-text color="primary">
+                      <div class="title-1">
+                        <span *ngIf="coupon.status == 'active'" class="green">
+                          <ion-icon name="ios-radio-button-on"></ion-icon>
+                        </span>
+                        <span *ngIf="coupon.status == 'not_active' || coupon.status == 'pending'" class="red">
+                          <ion-icon name="ios-radio-button-on"></ion-icon>
+                        </span>
+                        {{coupon.code}}
+                        <span *ngIf="coupon.status == 'active'" class="green">مفعل</span>
+                        <span *ngIf="coupon.status == 'not_active'" class="red">غير مفعل</span>
+                        <span *ngIf="coupon.status == 'pending'" class="red">أنتظار موافقة</span>
+                      </div>
+                    </ion-text>
+                    <div class="title-2">
+                      كوبون خصم {{coupon.value}}
+                      <span *ngIf="coupon.type == 'percent'">%</span>
+                      <span *ngIf="coupon.type == 'money'">جنيه</span>
+                    </div>
+
+                  </ion-col>
+                  <ion-col size="2" class="share-icon" (click)="share(coupon.code)">
+                    <ion-icon name="share" color="primary"></ion-icon>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+              <ion-grid>
+                <ion-row [routerLink]="['/single-coupon/' + coupon.id]">
+
+                  <ion-col size="12" >
+                    <p>عدد مستخدمين الكوبون: {{coupon.count}}</p>
+                  </ion-col>
+                  <ion-col size="6">
+                    <p>من: {{coupon.from | date: "dd/MM/yyyy "}}</p>
+                  </ion-col>
+                  <ion-col size="6" >
+                    <p>الي: {{coupon.to | date: "dd/MM/yyyy "}}</p>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card-content>
+          </ion-card>
+        </ion-item>
+      </ion-item-sliding>
+    </ion-list>
+    <ion-button expand="block" class="add-btn" routerLink="/add-coupon">
+      <ion-icon color="light" name="arrow-dropleft-circle"></ion-icon>
+      <ion-label color="light" padding>
+        إضافة كوبون جديد
+      </ion-label>
+    </ion-button>
+    <br><br><br><br>
+  </div>
+  <div class="no-adds" *ngIf="coupons?.length==0">
+    <img src="../assets/img/no-coupon.JPG">
+    <p>لم تقم حتى الآن بإضافة كوبونات حتي الأن</p>
+    <a routerLink="/add-coupon">أضف كوبونك الأول</a>
+  </div>
+</ion-content>

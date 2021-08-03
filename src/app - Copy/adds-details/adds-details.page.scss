@@ -1,0 +1,53 @@
+.fileInput {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.addImg{
+    width: 100%;
+    height: 150px;
+    background-color: #DFE1E8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    border: 2px dashed #6A699D;
+    ion-icon{
+        font-size: 26px
+    }
+}
+.add-btn{
+    margin-top: 30px
+}
+ion-item{
+    --border-bottom:0;
+    --highlight-color-focused:transparent;
+    --highlight-color-valid: transparent;
+    --highlight-color-invalid: transparent;
+    --highlight-color-focused: var(--ion-color-light);
+    --background	: transparent;
+
+}
+ion-textarea{
+    border:1px solid #C1C1C1;
+    border-radius: 5px;
+    color: rgba(25, 25, 52, 0.5);
+    background: white !important;
+    }
+ion-textarea input{
+    padding-right: 15px;
+    padding-left: 15px;
+}
+img{
+    width: 100%;
+    height: 150px;
+}
+.label-floating.sc-ion-label-md-h, .label-stacked.sc-ion-label-md-h{
+    margin-bottom: 20px;
+    display: block;
+    font-size: 16px
+}

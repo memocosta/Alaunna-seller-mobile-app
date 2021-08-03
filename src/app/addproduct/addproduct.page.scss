@@ -1,0 +1,17 @@
+.add-page ion-list{
+    background: transparent;
+}
+.add-page ion-list ion-item{
+    margin: 20px 5px;
+    border-radius: 12px;
+    border-right:12px solid var(--ion-color-primary);
+}
+.add-page ion-thumbnail{
+    background-color: transparent;
+}
+
+ion-item img{
+    height: 50px;
+    width: auto;
+    margin:  10px
+}

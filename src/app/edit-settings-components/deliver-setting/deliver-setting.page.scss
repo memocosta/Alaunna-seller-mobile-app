@@ -1,0 +1,45 @@
+.main-page{
+    overflow: auto;
+}
+ion-header{
+    background-color: #7d2468;
+    color: #fff;
+}
+.head{
+    // padding-bottom: 55px;
+}
+.add{
+    padding-bottom: 30px;
+}
+.text-d{
+    font-size: larger;
+    font-weight: 600;
+}
+ion-button{
+    color: #fff !important;
+    text-align: right;
+    height: 43px;
+    width: 100%;
+    margin-right: 45px;
+    margin-top: 30px
+
+}
+ion-checkbox{
+    margin-left: 15px;
+}
+ion-icon{
+    padding: 10px;
+    font-size: 28px;
+}
+
+.text{
+    color: #fff;
+    margin-left: auto;
+    color: #fff !important;
+    font-size: 18px;
+}
+
+.alert-button.sc-ion-alert-md{
+    background-color: blueviolet !important;
+    margin: auto !important;
+}

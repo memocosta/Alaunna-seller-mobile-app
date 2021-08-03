@@ -1,0 +1,192 @@
+<ion-header>
+  <ion-toolbar color="grey">
+    <ion-title color="primary">طلباتي</ion-title>
+    <ion-row>
+      <ion-col size="1">
+        <div class="header-icon">
+          <!-- <ion-icon name="menu" color="primary"></ion-icon> -->
+          <ion-menu-button name="menu" color="primary"></ion-menu-button>
+        </div>
+      </ion-col>
+      <ion-col size="9">
+        <ion-searchbar placeholder="البحث"></ion-searchbar>
+      </ion-col>
+      <ion-col size="2">
+        <div class="header-icon" routerLink="/notifications">
+          <ion-badge *ngIf="countNotification > 0">{{countNotification}}</ion-badge>
+          <ion-icon name="notifications" color="primary"></ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="order-page">
+  <ion-text class="ion-padding-horizontal">
+حاله الطلب  : فى الانتظار
+  </ion-text>
+ 
+  <ion-card color="light">
+    <ion-card-content class="ion-no-padding" *ngIf="order">
+      <ion-grid>
+        <ion-row>
+          <hr>
+          <ion-col size="12" class="ion-text-right">
+            <ion-text style="display: block;" color="primary">
+              إسم العميل : <span *ngIf="order.user"> {{ order.user.name }}</span><span *ngIf="!order.user"> عميل
+                غير معروف</span>
+            </ion-text>
+          </ion-col>
+
+          <ion-col size="6" class="ion-text-right">
+            <ion-text style="display: block;" color="primary" *ngIf="order.delivery_type == 'market'">
+              تاريخ الطلب : <span style="font-size: .8em;"> {{ order.sutiable_time | date: "dd-MM-yyyy , H:mm" }}
+              </span>
+            </ion-text>
+            <ion-text style="display: block;" color="primary" *ngIf="order.delivery_type == 'delivery'">
+              تاريخ الطلب : <span style="font-size: .8em;"> {{ order.sutiable_time | date: "dd-MM-yyyy , H:mm" }}
+              </span>
+            </ion-text>
+          </ion-col>
+          <ion-col size="6" class="ion-text-left">
+            <!-- <ion-text style="display: block;" color="primary">
+              <span *ngIf="order.orderproducts[0] && order.orderproducts[0].status == 'accepted'"
+                style="color: #69bb7b;"> {{ OrderStatus.accepted}} </span>
+              <span *ngIf="order.orderproducts[0] && order.orderproducts[0].status == 'canceld'" style="color: red;">
+                {{ OrderStatus.canceld}} </span>
+              <span *ngIf="order.orderproducts[0] && order.orderproducts[0].status == 'pending'" style="color: brown;">
+                {{ OrderStatus.pending}} </span>
+              <span *ngIf="order.orderproducts[0] && order.orderproducts[0].status == 'shipping'"
+                style="color: #7D2468;"> {{ OrderStatus.shipping}} </span>
+            </ion-text> -->
+          </ion-col>
+          <ion-col size="6" class="ion-text-right">
+            <ion-text style="display: block;" color="primary">
+              رقم الطلب : <span> {{ order.id  }} </span>
+            </ion-text>
+          </ion-col>
+          <ion-col size="6" class="ion-text-left">
+            <ion-text style="display: block;" color="primary" *ngIf="!order.fast">
+              قيمة المبلغ : <span> {{ order.sumOrder}} EGP</span>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  <!-- normal order products -->
+  <ng-container *ngIf="order">
+    <ion-text class="ion-padding-horizontal">
+      تفاصيل المنتج
+    </ion-text>
+    <ng-container *ngFor="let product of order.MarketCartProduct">
+        <ion-card-content class="ion-no-padding" *ngIf="order">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="3">
+                <img *ngIf="product.images && product.images[0]"
+                  [src]="ImgeBase + '/'  + product.images[0].for + '/'  + product.images[0].name ">
+                <img *ngIf="!product.images || !product.images[0]" src="http://via.placeholder.com/100x100">
+              </ion-col>
+              <ion-col size="9" class="ion-text-right">
+                <ion-text style="display: block;" color="primary">
+                  {{product.product.name}}
+                </ion-text>
+                <ng-container
+                  *ngIf="product.extra_options&&product.extra_options.length > 0">
+                  <ion-text style="display: block;" color="primary"
+                    *ngFor="let option of product.product.extra_options">
+                    {{ option.name}} : {{ option.user_value}}
+                  </ion-text>
+                </ng-container>
+                <ion-text style="display: block;" color="primary">
+                  الكمية : {{ product.product.Quantity  }}
+                </ion-text>
+                <ion-text style="display: block;" color="primary">
+                  {{ product.product['market'][0]['Market_Products']['Selling_price']}} EGP
+                </ion-text>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+
+    </ng-container>
+
+    <ion-text class="ion-padding-horizontal" color="primary">
+      تفاصيل المبلغ
+    </ion-text>
+    <ion-card color="light">
+      <ion-card-content class="ion-no-padding" *ngIf="order">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="8" class="ion-text-right">
+              <ion-text style="display: block;" color="primary">
+                السعر  : <span> {{ order.sumOrder }} EGP</span>
+              </ion-text>
+              <!-- <ion-text style="display: block;" color="primary" *ngIf="order.sumallCoupons && order.sumallCoupons>0"> -->
+              <ion-text style="display: block;" color="primary" *ngIf="order.coupon"> 
+
+                     كوبون الخصم : <span> {{ order.couponVal}} %</span>
+                     &nbsp; &nbsp; &nbsp;
+                رقم الكوبون  : <span> {{ order.couponCode}} </span>
+              </ion-text>
+              <ion-col size="6" class="ion-text-right">
+               
+              </ion-col>
+              <ion-col size="6" class="ion-text-left">
+             
+              </ion-col>
+              <ion-text style="display: block;" color="primary" *ngIf="order.coupon" >
+                اجمالى المبلغ  بعد الخصومات : <span> {{ order.sumallOrder }} EGP</span>
+              </ion-text>
+              <ion-text style="display: block;" color="primary"  >
+                اجمالى المبلغ  بعد الخصومات : <span> {{ order.sumOrder }} EGP</span>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+
+
+  
+
+  <ion-grid class="ion-margin-vertical" *ngIf="order">
+    <ion-row class="ion-margin-bottom">
+      <ion-col size="8" offset="2" >
+        <ion-button expand="block" color="light"
+          disabled
+          (click)="changeStatusByMarket('shipping',true)">جاهز</ion-button>
+      </ion-col>
+      <ion-col size="8" offset="2">
+        <ion-button expand="block" color="light"
+          disabled
+          (click)="changeStatusByMarket('accepted',true)">  جاري التوصيل</ion-button>
+      </ion-col>
+      <ion-col size="8" offset="2">
+        <ion-button expand="block" color="light"
+disabled          (click)="changeStatusByMarket('accepted',true)">   مكتمل</ion-button>
+      </ion-col>
+    
+      <ion-col size="8" offset="2">
+        <ion-button expand="block" color="light"
+          disabled
+          (click)="changeStatusByMarket('canceld',true)">إلغاء الطلب</ion-button>
+      </ion-col>
+      <ion-col size="8" offset="2">
+        <ion-button expand="block" color="light"
+          disabled
+          (click)="changeStatusByMarket('canceld',true)"> مسترجع</ion-button>
+      </ion-col>
+      <ion-col size="8" offset="2">
+        <ion-button expand="block" color="light" [routerLink]="'/chat-room'"
+          [queryParams]="{user_id : order.owner?.id , order: order.id}"> تواصل مع العميل</ion-button>
+      </ion-col>
+      <ion-col class="ion-margin-vertical"></ion-col>
+    </ion-row>
+
+  </ion-grid>
+  <br><br><br>
+
+</ion-content>

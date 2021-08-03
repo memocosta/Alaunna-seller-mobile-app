@@ -1,0 +1,46 @@
+<ion-content color="light">
+  <div class="login-logo">
+    <img src="assets/img/Group 2823.png" alt="">
+  </div>
+  <br><br>
+  <ion-text color="primary">
+    <h2 class="text-center">تأكيد رقم الهاتف</h2>
+    <h6 class="text-center"> برجاء أدخل الكود الذي تم أرساله للرقم
+      <br>
+      {{data.phone}}
+    </h6>
+  </ion-text>
+  <br><br>
+  <div class="form-container">
+    <div class="form">
+      <ion-list lines="none">
+        <ion-item>
+          <ion-item>
+            <ion-input type="text" text-center placeholder="" maxlength="1" [(ngModel)]="c4"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input type="text" text-center placeholder="" maxlength="1" [(ngModel)]="c3"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input type="text" text-center placeholder="" maxlength="1" [(ngModel)]="c2"></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-input type="text" text-center placeholder="" maxlength="1" [(ngModel)]="c1"></ion-input>
+          </ion-item>
+        </ion-item>
+
+        <ion-item>
+          <p class="notice">لم يصلك الكود... <span (click)="sendCode()">إعادة أرسال</span>.</p>
+        </ion-item>
+        <br><br>
+        <ion-button expand="block" class="sign-btn" (click)="onActivatePressed()">
+          <ion-icon color="light" name="arrow-dropleft-circle"></ion-icon>
+          <ion-label color="light" class="ion-padding">تأكيد</ion-label>
+        </ion-button>
+
+      </ion-list>
+    </div>
+
+  </div>
+
+</ion-content>

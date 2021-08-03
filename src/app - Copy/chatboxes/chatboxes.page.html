@@ -1,0 +1,70 @@
+<ion-header>
+  <ion-toolbar color="grey">
+    <ion-title color="primary">الرسائل</ion-title>
+    <ion-row>
+      <ion-col size="1">
+        <div class="header-icon">
+          <!-- <ion-icon name="menu" color="primary"></ion-icon> -->
+          <ion-menu-button name="menu" color="primary"></ion-menu-button>
+        </div>
+      </ion-col>
+      <ion-col size="9">
+        <ion-searchbar placeholder="البحث" ></ion-searchbar>
+      </ion-col>
+      <ion-col size="2">
+        <div class="header-icon" routerLink="/notifications">
+          <ion-badge *ngIf="countNotification > 0">{{countNotification}}</ion-badge>
+          <ion-icon name="notifications" color="primary"></ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="chatboxes">
+  <ion-list class="message-list" *ngIf="loadMessages">
+
+    <ion-item-sliding *ngFor="let room of Rooms">
+      <ion-item class="item" *ngIf="room.user" [routerLink]="['/chat-room']" [queryParams]="{user_id : room.user.id}">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="3">
+              <img *ngIf="room.user && room.user.Image"
+                [src]="ImageLink + '/' + room?.user.Image?.for + '/' + room?.user.Image.name"
+                onError="src = 'assets/img/user.png'">
+              <img *ngIf=" room.user &&  !room.user.Image" src="./assets/img/user.png">
+            </ion-col>
+            <ion-col size="9">
+              <ion-card-content>
+                <ion-card-title color="muted">
+                  {{ room?.messages[0]?.createdAt | date: 'M/d/yy, h:mm a' }}
+                  <span class="read-sign" [ngClass]="{'active': (room?.messages[0]?.read == false && room?.messages[0]?.from_user_id)}">•</span>
+                </ion-card-title>
+                <div class="clearfix"></div>
+                <ion-card-subtitle color="primary" [ngClass]="{'boldText': (room?.messages[0]?.read == false && room?.messages[0]?.from_user_id)}">
+                  {{ room.user?.name }}
+                </ion-card-subtitle>
+                <ion-text color="primary" [ngClass]="{'boldText': (room?.messages[0]?.read == false && room?.messages[0]?.from_user_id)}">
+                  {{ room?.messages[0]?.text }}
+                </ion-text>
+              </ion-card-content>
+            </ion-col>
+
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item-options side="start">
+        <ion-item-option color="danger" (click)="onDeleteClicked(room.id)">
+          <div class="text-center">
+            <ion-icon name="trash"></ion-icon>
+            <ion-label>حذف</ion-label>
+          </div>
+        </ion-item-option>
+
+      </ion-item-options>
+    </ion-item-sliding>
+
+  </ion-list>
+
+</ion-content>

@@ -1,0 +1,82 @@
+<ion-header>
+  <ion-toolbar color="grey">
+    <ion-title color="primary">منتجات الااونا</ion-title>
+    <ion-row>
+      <ion-col size="1">
+        <div class="header-icon">
+          <!-- <ion-icon name="menu" color="primary"></ion-icon> -->
+          <ion-menu-button name="menu" color="primary"></ion-menu-button>
+        </div>
+      </ion-col>
+      <ion-col size="9">
+        <ion-searchbar palceholder="البحث" ></ion-searchbar>
+      </ion-col>
+      <ion-col size="2">
+        <div class="header-icon" routerLink="/notifications">
+          <ion-badge *ngIf="countNotification > 0">{{countNotification}}</ion-badge>
+          <ion-icon name="notifications" color="primary"></ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-item lines="none" color="none" (click)="onCategoryClicked()">
+        <!-- <ion-label position="stacked"> التصنيف , الفئه , الفئه الفرعيه </ion-label> -->
+        <ion-input placeholder="اختار التصنيف" type="text" name="cat_sub_title"
+           [(ngModel)]="cat_sub_title"></ion-input>
+      </ion-item>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="myproducts">
+  <ion-list class="item item-trns" lines="none">
+    <ion-item *ngFor="let product of Products; let i = index" color="none">
+      <ion-card color="light">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="4">
+              <img *ngIf="!product.images || !product.images[0]"
+                src="assets/img/WhatsApp Image 2019-09-14 at 3.13.35 PM.png">
+              <img *ngIf="product.images && product.images[0]"
+                [src]="ImageBase + '/' + product.images[0].for  + '/' + product.images[0].name"
+                [alt]="product.images[0].alt">
+            </ion-col>
+            <ion-col size="6">
+              <ion-card-content>
+                <ion-card-title color="primary">
+                  {{ product.name }}
+                </ion-card-title>
+                <!-- <ion-text color="primary">
+                      سعر البيع <span>{{ product['market'][0]['Market_Products']['Selling_price'] }} EGP</span>
+                    </ion-text>
+                    <br> -->
+                <p>
+                  {{ product.description.substr(0 , 30) }}
+                </p>
+              </ion-card-content>
+            </ion-col>
+            <ion-col size="2">
+              <!-- <ion-item> -->
+              <ion-checkbox [(ngModel)]="SelectedProduct[product.id]" (ionChange)="onSelelctChangeForProduct(i)">
+              </ion-checkbox>
+              <!-- </ion-item> -->
+            </ion-col>
+            <!-- <ion-col size="1">
+                  <a class="popover-btn" (click)="settingsPopover()">
+                    <ion-icon name="more"></ion-icon>
+                  </a>
+                </ion-col> -->
+          </ion-row>
+        </ion-grid>
+      </ion-card>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-fab-button color="success" (click)="onAddClicked()" >
+      <ion-icon name="checkmark"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

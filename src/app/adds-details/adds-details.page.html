@@ -1,0 +1,47 @@
+<ion-header>
+  <ion-toolbar color="grey">
+    <ion-title color="primary">أضف اعلان</ion-title>
+    <ion-row>
+      <ion-col size="1">
+        <div class="header-icon">
+          <!-- <ion-icon name="menu" color="primary"></ion-icon> -->
+          <ion-menu-button name="menu" color="primary"></ion-menu-button>
+        </div>
+      </ion-col>
+      <ion-col size="9">
+        <ion-searchbar placeholder="البحث"></ion-searchbar>
+      </ion-col>
+      <ion-col size="2">
+        <div class="header-icon" routerLink="/notifications">
+          <ion-badge *ngIf="countNotification > 0">{{countNotification}}</ion-badge>
+          <ion-icon name="notifications" color="primary"></ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form [formGroup]="AdsForm" novalidate (submit)="onEditClicked()">
+    <label *ngIf="!AdsData.image" class="addImg" (click)="OpenImage()">
+      <ion-icon name="photos"></ion-icon>
+    </label>
+
+    <img *ngIf="AdsData.image && AdsData.image.base64" [src]="'data:image/jpeg;base64,' + AdsData.image.base64"
+      (click)="OpenImage()">
+
+    <img *ngIf="AdsData.image && !AdsData.image.base64"
+      [src]="ImageBase + '/' + AdsData.image.for + '/' + AdsData.image.name" (click)="OpenImage()">
+    <ion-item>
+      <ion-label position="stacked"> وصف الاعلان </ion-label>
+      <ion-textarea rows="5" name="title" formControlName="title" type="tel" [(ngModel)]="AdsData.title"></ion-textarea>
+    </ion-item>
+    <ion-button expand="block" class="add-btn" type="submit">
+      <ion-icon color="light" name="arrow-dropleft-circle"></ion-icon>
+      <ion-label color="light" padding>
+        تعديل الأن
+      </ion-label>
+    </ion-button>
+  </form>
+</ion-content>

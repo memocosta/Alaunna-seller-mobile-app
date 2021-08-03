@@ -1,0 +1,29 @@
+.fileInput {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+.addImg{
+    width: 100%;
+    height: 150px;
+    background-color: #DFE1E8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    border: 2px dashed #6A699D;
+    ion-icon{
+        font-size: 26px
+    }
+}
+img{
+    width: 100%;
+    height: 150px;
+}
+.add-btn{
+    margin-top: 30px
+}

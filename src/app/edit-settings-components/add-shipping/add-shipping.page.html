@@ -1,0 +1,85 @@
+<ion-button routerLink="/deliver-setting">
+  <ion-icon name="arrow-back"></ion-icon>
+  <ion-text class="text">اضافه شحن خاص بك</ion-text>
+</ion-button>
+<ion-row class="active">
+  <ion-col size="10">
+    <ion-text class="text-d">
+      تفعيل خيار التوصيل
+    </ion-text>
+  </ion-col>
+  <ion-col size="2" class="ion-text-left">
+    <ion-toggle (click)="presentAlert()" checked *ngIf="data.activate_delivery_option"></ion-toggle>
+    <ion-toggle (click)="presentAlert()" *ngIf="!data.activate_delivery_option"></ion-toggle>
+  </ion-col>
+</ion-row>
+<form #f="ngForm" novalidate (ngSubmit)="onSubmit(f)">
+
+  <ion-grid size="12">
+
+    <ion-col>
+      <ion-item>
+        <ion-label position="floating">الاسم</ion-label>
+        <ion-input placeholder="مثلا : شركه شحن , مندوب توصيل , البريد المصري..." type="text" required name="name"
+          [(ngModel)]="data.name" #nameCtrl="ngModel"></ion-input>
+        <div style="margin-bottom: 15px;" *ngIf="!nameCtrl.valid && nameCtrl.touched">
+          <ion-text color="danger"> برجاء ادخال الاسم</ion-text>
+        </div>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">التكلفة</ion-label>
+        <ion-input placeholder="EGP 00.0 " type="number" required name="cost" [(ngModel)]="data.cost" #costCtrl="ngModel"
+          placeholder="التكلفة"></ion-input>
+        <div style="margin-bottom: 15px;" *ngIf="!costCtrl.valid && costCtrl.touched">
+          <ion-text color="danger"> برجاء ادخال التكلفة</ion-text>
+        </div>
+      </ion-item>
+      <ion-item>
+        <ion-label>المحافظه</ion-label>
+        <ion-select type="text" required name="country_id" [(ngModel)]="data.country_id" multiple
+          (ionChange)="onCountryChange()" placeholder="المحافظة" #country_idCtrl="ngModel" interface="popover">
+          <ion-select-option value="0">كل المحافظات</ion-select-option>
+          <ion-select-option value="{{country.id}}" *ngFor="let country of countries">{{country.name}}
+          </ion-select-option>
+
+        </ion-select>
+        <div style="margin-bottom: 15px;" *ngIf="!country_idCtrl.valid && country_idCtrl.touched">
+          <ion-text color="danger"> برجاء ادخال المحافظه</ion-text>
+        </div>
+      </ion-item>
+      <ion-item>
+        <ion-label>المدينه</ion-label>
+        <ion-select type="text" required name="city_id" [(ngModel)]="data.city_id" #city_idCtrl="ngModel" multiple
+          interface="popover" (ionChange)="onCityChange()">
+          <ion-select-option value="0">كل المدن</ion-select-option>
+          <ion-select-option value="{{city.id}}" *ngFor="let city of filterCities">{{city.name}}</ion-select-option>
+        </ion-select>
+        <div style="margin-bottom: 15px;" *ngIf="!city_idCtrl.valid && city_idCtrl.touched">
+          <ion-text color="danger"> برجاء ادخال المدينه</ion-text>
+        </div>
+      </ion-item>
+    </ion-col>
+    <ion-row>
+      <ion-col size="10">
+        <ion-text class="text-d">
+          تفعیل الدفع عند الاستلام
+        </ion-text>
+      </ion-col>
+      <ion-col size="2" class="ion-text-left">
+        <ion-toggle (click)="presentAlert2()" checked *ngIf="data.activate_payment_receipt"></ion-toggle>
+        <ion-toggle (click)="presentAlert2()" *ngIf="!data.activate_payment_receipt"></ion-toggle>
+      </ion-col>
+    </ion-row>
+    <ion-item *ngIf="data.activate_payment_receipt">
+      <ion-label position="floating">تكلفه الدفع عند الاستلام</ion-label>
+      <ion-input type="number" required name="cost_payment_receipt" [(ngModel)]="data.cost_payment_receipt"
+        #cost_payment_receiptCtrl="ngModel" placeholder="EGP 00.0 "></ion-input>
+      <div style="margin-bottom: 15px;" *ngIf="!cost_payment_receiptCtrl.valid && cost_payment_receiptCtrl.touched">
+        <ion-text color="danger"> برجاء ادخال تكلفه الدفع عند الاستلام</ion-text>
+      </div>
+    </ion-item>
+    <div style="text-align: center ;margin-bottom: 50px; margin-top: 15px;">
+      <ion-button type="submit" [disabled]="!f.valid" size="medium">اضافه</ion-button>
+    </div>
+  </ion-grid>
+</form>

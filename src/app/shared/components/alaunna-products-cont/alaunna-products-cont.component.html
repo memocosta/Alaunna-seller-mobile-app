@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar color="grey">
+    <!-- <ion-buttons slot="start">
+            <ion-button (click)="modalController.dismiss()" color="danger" >
+                <ion-icon slot="icon-only" name="close"></ion-icon>
+            </ion-button>
+          </ion-buttons> -->
+    <ion-title color="primary">منتجات الأونا</ion-title>
+    <!-- <ion-buttons slot="end">
+          <ion-button   color="success" (click)="DoneSelecteing('')" >
+              <ion-icon slot="icon-only" name="checkmark"></ion-icon>
+          </ion-button>
+        </ion-buttons> -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-slides id="mySlider" #mySlider [options]="slideOpts">
+    <ion-slide *ngFor="let product of SelectedProducts; let i = index">
+      <ion-list no-lines>
+        <h4> اسم المنتج : {{ product.name }} </h4>
+        <!-- <ion-item class="InputItem">
+          <ion-input type="number" placeholder="الكود الداخلي" [(ngModel)]="product['market_product'].InnderCode">
+          </ion-input>
+        </ion-item> -->
+        <ion-item class="InputItem">
+          <ion-input type="number" placeholder="سعر البيع" [(ngModel)]="product['market_product'].Selling_price">
+          </ion-input>
+        </ion-item>
+        <!-- <ion-item class="InputItem">
+          <ion-input type="number" placeholder="سعر الشراء" [(ngModel)]="product['market_product'].Purchasing_price">
+          </ion-input>
+        </ion-item> -->
+        <!-- <ion-item class="InputItem">
+          <ion-input type="text" placeholder="تاريخ انتهاء الصلاحيه" [(ngModel)]="product['market_product'].Expire_date"
+            (ionFocus)="onDateNeeded(i)"></ion-input>
+        </ion-item> -->
+        <!-- <ion-item class="InputItem">
+          <ion-input type="number" placeholder="الضريبه" [(ngModel)]="product['market_product'].Tax"></ion-input>
+        </ion-item> -->
+        <ion-item class="InputItem">
+          <ion-input type="number" placeholder="الكميه" [(ngModel)]="product['market_product'].quantity"></ion-input>
+        </ion-item>
+        <ion-item class="InputItem">
+          <ion-input type="number" placeholder="السعر بعد الخصم" [(ngModel)]="product['market_product'].Price_after">
+          </ion-input>
+        </ion-item>
+        <!-- 
+        <ion-item>
+          <ion-label> عرض علي الموقع والتطبيق </ion-label>
+          <ion-checkbox mode="ios" [(ngModel)]="product['market_product'].Showen" checked="false"></ion-checkbox>
+        </ion-item> -->
+
+        <ion-button *ngIf="i == SelectedProducts.length -1" expand="block" (click)="onAddClicked()" class="add-btn">
+          <ion-icon color="light" name="arrow-dropleft-circle"></ion-icon>
+          <ion-label color="light" class="ion-padding">
+            اضافه المنتجات
+          </ion-label>
+        </ion-button>
+
+
+        <ion-button *ngIf="i != SelectedProducts.length - 1" expand="block" (click)="onNextClicked(mySlider)" class="add-btn">
+          <ion-icon color="light" name="arrow-dropleft-circle"></ion-icon>
+          <ion-label color="light" class="ion-padding">
+            التالي
+          </ion-label>
+        </ion-button>
+
+      </ion-list>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

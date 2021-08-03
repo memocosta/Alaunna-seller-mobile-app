@@ -1,0 +1,83 @@
+.add-prodInfo-page {
+    .disabled-step {
+        opacity: .5;
+    }
+
+    h6 {
+        color: var(--ion-color-primary);
+
+        ion-icon {
+            font-size: 18px;
+            vertical-align: middle;
+        }
+    }
+
+    img {
+        width: 100%;
+        border-radius: 10px;
+    }
+
+    .add-new-image {
+        width: 80px !important;
+        height: 80px !important;
+    }
+
+    .form-container {
+        background-color: transparent;
+        padding-bottom: 60px;
+
+        .options-button {
+            background-color: #80808085;
+            margin: 15px;
+            border-radius: 5px;
+        }
+
+        ion-input {
+            border: 1px solid #C1C1C1;
+            border-radius: 5px;
+            color: rgba(25, 25, 52, 0.5);
+            --padding-end: 15px;
+            --padding-start: 15px;
+
+            input {
+                padding-right: 15px;
+                padding-left: 15px;
+            }
+        }
+
+        ion-item {
+            --border-bottom: 0;
+            --background: transparent;
+            --highlight-color-focused: transparent
+        }
+
+        .label-floating.sc-ion-label-md-h,
+        .label-stacked.sc-ion-label-md-h {
+            margin-bottom: 20px;
+            display: block;
+            font-size: 16px
+        }
+
+        ion-checkbox {
+            margin-left: 5px;
+        }
+
+        ion-select {
+            border-radius: 10px;
+            padding: 10px;
+            max-width: 100%;
+            border: 1px solid rgb(189, 189, 189);
+            color: var(--ion-color-primary)
+        }
+
+        ion-textarea {
+            border: 1px solid rgb(189, 189, 189);
+            padding: 5px 10px;
+            border-radius: 10px;
+        }
+    }
+
+    .add-btn {
+        margin: 20px 10px;
+    }
+}

@@ -1,0 +1,60 @@
+<ion-header>
+  <ion-toolbar color="grey">
+    <ion-title color="primary"> الاشعارات </ion-title>
+    <ion-row>
+      <ion-col size="1">
+        <div class="header-icon">
+          <!-- <ion-icon name="menu" color="primary"></ion-icon> -->
+          <ion-menu-button name="menu" color="primary"></ion-menu-button>
+        </div>
+      </ion-col>
+      <ion-col size="10">
+        <ion-searchbar placeholder="البحث"></ion-searchbar>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-row>
+    <!-- <ion-col class="buttCol">
+      <ion-button fill="none" color="danger" class="clearAll" (click)="onRemoveAll()">
+        <ion-icon name="trash" color="reddish"></ion-icon>
+        <ion-text>
+          مسح الكل
+        </ion-text>
+      </ion-button>
+    </ion-col> -->
+  </ion-row>
+
+  <!-- <ion-card class="notifyCard" *ngFor="let noti of notifications">
+    <ion-icon name="notifications" color="light"></ion-icon>
+    <p> {{noti.message}} </p>
+  </ion-card> -->
+
+  <ion-list lines="none">
+    <!-- <ion-item class="noti-item" *ngFor="let noti of notifications">
+      {{noti.message}}
+      <ion-icon name="notifications" slot="start" color="primary"></ion-icon>
+    </ion-item> -->
+
+    <ion-item class="noti-item" *ngIf="OrdersCount > 0" [routerLink]="['/myorders']">
+      <ion-icon name="list-box" slot="start" color="primary"></ion-icon>
+      <ion-text>هناك عدد  <ion-badge>{{OrdersCount}}</ion-badge> طلبات جديدة </ion-text>
+    </ion-item>
+
+    <ion-item class="noti-item" *ngIf="unreadMessages > 0" [routerLink]="['/chatboxes']">
+      <ion-icon name="chatboxes" slot="start" color="primary"></ion-icon>
+      <ion-text>هناك عدد  <ion-badge>{{unreadMessages}}</ion-badge> رسائل جديدة </ion-text>
+    </ion-item>
+
+    <ion-item class="noti-item" *ngIf="newPrices > 0" [routerLink]="['/opportunity']">
+      <ion-icon name="filing" slot="start" color="primary"></ion-icon>
+      <ion-text>هناك عدد  <ion-badge>{{newPrices}}</ion-badge> فرص بيع جديدة </ion-text>
+    </ion-item>
+
+  </ion-list>
+
+
+</ion-content>

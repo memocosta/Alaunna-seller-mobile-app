@@ -1,0 +1,82 @@
+.nodata{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    flex-direction: column;
+    color: #D6D3D6;
+}
+.myorders-page ion-card{
+    border-radius: 15px;
+    
+}
+.myorders-page ion-card img{
+    width: 100%;
+    height: auto;
+
+}
+.myorders-page .card-content-md{
+    padding-top: 0;
+}
+.myorders-page ion-card ion-card-title,.myorders-page ion-card ion-text {
+    margin-bottom: 10px;
+}
+.myorders-page .card-footer img{
+    width: 20px;
+    height: 20px;
+}
+.card-footer{
+    padding:5px 15px;
+    color: #ABABB1;
+}
+.card-footer ion-icon{
+    font-size: 18px
+}
+.card-footer img{
+    margin-left: 10px
+}
+.myorders-page .popover-btn{
+    font-size: 20px
+}
+ion-text{
+    font-size: .9em;
+    font-weight: 500;
+    color: #000;
+    span{
+        font-weight: 600;
+        color: #666;
+    }
+    margin-bottom: 5px !important;
+}
+
+/*sectionTwo*/
+.button-customer{
+    background-color: #7d2468;
+    color: #fff !important;
+    text-align:right;
+    height: 48px;
+    width: 100%;
+}
+// ion-icon{
+//     padding: 10px;
+//     font-size: 28px;
+// }
+.text{
+    color: #fff;
+    margin-left: auto;
+    color: #fff !important;
+    font-size: 18px;
+}
+// ion-row{
+//     margin: auto;
+//     display: block;
+//     text-align: center;
+// }
+.button{
+    margin-left: 100px;
+}
+.orders{
+    margin-top: 130px;
+}
+   

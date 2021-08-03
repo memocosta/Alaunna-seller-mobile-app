@@ -1,0 +1,24 @@
+.statistics{
+    background: transparent !important;
+    .item .item-content {
+        background-color: transparent !important;
+      }
+    ion-item{
+        --background: transparent !important;
+        .item-native{background: transparent !important;}
+        ion-label{
+            background: #fff;
+            padding: 10px;
+            border-radius: 20px;
+        }
+        ion-icon{
+            background: #fff;
+            padding: 10px;
+            border-radius: 50%;
+            margin-left: 10px;
+        }
+        span{
+            float: left;
+        }
+    }
+}

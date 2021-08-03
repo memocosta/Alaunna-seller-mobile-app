@@ -1,0 +1,102 @@
+<ion-header>
+  <ion-toolbar color="grey">
+    <ion-title color="primary">عروضي</ion-title>
+    <ion-row>
+      <ion-col size="1">
+        <div class="header-icon">
+          <!-- <ion-icon name="menu" color="primary"></ion-icon> -->
+          <ion-menu-button name="menu" color="primary"></ion-menu-button>
+        </div>
+      </ion-col>
+      <ion-col size="9">
+        <ion-searchbar></ion-searchbar>
+      </ion-col>
+      <ion-col size="2">
+        <div class="header-icon" routerLink="/notifications">
+          <ion-badge *ngIf="countNotification > 0">{{countNotification}}</ion-badge>
+          <ion-icon name="notifications" color="primary"></ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="myoffers">
+  <div *ngIf="offers?.length>0">
+    <ion-list class="item item-trns" lines="none">
+      <ion-item-sliding color="none" *ngFor="let offer of offers">
+        <ion-item color="none">
+          <ion-card color="light">
+            <ion-card-content no-padding>
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="10" [routerLink]="['/single-offer/' + offer.id]">
+                    <ion-text color="primary">
+                      {{offer.title}}
+                    </ion-text>
+                  </ion-col>
+                  <ion-col size="2" class="share-icon" (click)="share(offer)">
+                    <ion-icon name="share" color="primary"></ion-icon>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+              <ion-grid [routerLink]="['/single-offer/' + offer.id]">
+                <ion-row>
+                  <ion-col size="4">
+                    <p>تاريخ العرض</p>
+                  </ion-col>
+                  <ion-col size="8" class="ion-text-end">
+                    <p>من {{offer.from | date: "dd/MM/yyyy "}} الي {{offer.to | date: "dd/MM/yyyy "}}</p>
+                  </ion-col>
+                  <ion-col size="5">
+                    <p> الخصم</p>
+                  </ion-col>
+                  <ion-col size="7" class="ion-text-end">
+                    <p *ngIf="offer.value > 0">{{offer.value}}%</p>
+                    <p *ngIf="offer.value == 0">عرض خاص</p>
+                  </ion-col>
+                  <!-- <ion-col size="9">
+                    <p>عدد مشاهدات العرض</p>
+                  </ion-col>
+                  <ion-col size="3" class="ion-text-end">
+                    <p>15</p>
+                  </ion-col> -->
+                </ion-row>
+                <!-- <hr>
+                <ion-row>
+                  <ion-col size="12">
+                    <p>{{offer.description}}</p>
+                  </ion-col>
+                </ion-row> -->
+                <hr>
+                <ion-row>
+                  <ion-col size="7">
+                    <p>{{offer.updatedAt | date: "dd/MM/yyyy "}}</p>
+                  </ion-col>
+                  <ion-col size="5" class="ion-text-end">
+                    <a *ngIf="offer.status == 'active'" class="green">مفعل</a>
+                    <a *ngIf="offer.status == 'not_active'" class="red">غير مفعل</a>
+                    <a *ngIf="offer.status == 'pending'" class="red">معلق</a>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card-content>
+          </ion-card>
+        </ion-item>
+      </ion-item-sliding>
+    </ion-list>
+    <ion-button expand="block" class="add-btn" routerLink="/add-offer">
+      <ion-icon color="light" name="arrow-dropleft-circle"></ion-icon>
+      <ion-label color="light" padding>
+        إضافة عرض جديد
+      </ion-label>
+    </ion-button>
+    <br><br><br><br>
+  </div>
+  <div class="no-adds" *ngIf="offers?.length==0">
+    <img src="../assets/img/Capture.PNG">
+    <p>لم تقم حتى الآن بإضافة عروض لمتجرك</p>
+    <a routerLink="/add-offer">أضف عرضك الأول</a>
+  </div>
+</ion-content>

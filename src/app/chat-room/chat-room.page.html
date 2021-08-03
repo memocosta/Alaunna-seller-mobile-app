@@ -1,0 +1,162 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button name="menu" color="primary"></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ RoomData?.user.name }}</ion-title>
+    <ion-buttons slot="end">
+      <ion-back-button icon="arrow-forward">
+      </ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ng-container *ngIf="order && !order.fast && order.products">
+    <ion-text class="ion-padding-horizontal">
+      تفاصيل المنتج
+    </ion-text>
+    <ng-container *ngFor="let product of order.products">
+      <ion-card color="light order">
+        <ion-card-content class="ion-no-padding" *ngIf="order">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="3">
+                <img *ngIf="product.images && product.images[0]"
+                  [src]="ImageLink + '/'  + product.images[0].for + '/'  + product.images[0].name ">
+                <img *ngIf="!product.images || !product.images[0]" src="http://via.placeholder.com/100x100">
+              </ion-col>
+              <ion-col size="9" class="ion-text-right">
+                <ion-text style="display: block;" color="primary">
+                  {{product.name}}
+                </ion-text>
+                <ng-container
+                  *ngIf="product.OrderProducts.extra_options&&product.OrderProducts.extra_options.length > 0">
+                  <ion-text style="display: block;" color="primary"
+                    *ngFor="let option of product.OrderProducts.extra_options">
+                    {{ option.name}} : {{ option.user_value}}
+                  </ion-text>
+                </ng-container>
+                <ion-text style="display: block;" color="primary">
+                  الكمية : {{ product.OrderProducts.Quantity  }}
+                </ion-text>
+                <ion-text style="display: block;" color="primary">
+                  <!-- {{ product.OrderProducts.Final_Price }} EGP -->
+                  {{ product['market'][0]['Market_Products']['Selling_price'] }} EGP
+                </ion-text>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
+  </ng-container>
+  <!-- fast order data -->
+  <ng-container *ngIf="order && order.fast">
+    <ion-text class="ion-padding-horizontal">
+      تفاصيل المنتج
+    </ion-text>
+    <ng-container>
+      <ion-card color="light order">
+        <ion-card-content class="ion-no-padding">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="3" *ngIf="order.fast.image">
+                <img [src]="ImageLink + '/'  + order.fast.image.for + '/'  + order.fast.image.name ">
+              </ion-col>
+              <ion-col class="ion-text-right">
+                <ion-text style="display: block;" color="primary">
+                  {{order.fast.description}}
+                </ion-text>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
+
+  </ng-container>
+
+  <ng-container class="messages-container" *ngFor="let message of Messages">
+    <div class="FromMessage" *ngIf="message.from_user_id">
+      <ion-row>
+
+        <ion-col size="1">
+        </ion-col>
+        <ion-col size="9">
+          <span class="MessageTime"> {{message?.createdAt | date:'short'}} </span>
+          <div *ngIf="message?.type == 'message'" >
+            <p [innerHTML]="message.text"></p>
+          </div>
+          <img class="ImageChat" *ngIf="message?.type == 'image'" #imgProf2
+            (error)="imgProf2.src = './assets/img/user.png'"
+            [src]="ImageLink + '/' + message?.image?.for + '/' + message?.image?.name">
+        </ion-col>
+        <ion-col size="2">
+          <img [src]="ImageLink + '/' + RoomData?.user.Image?.for + '/' + RoomData?.user.Image?.name" #imgProf
+            (error)="imgProf.src = './assets/img/user.png'">
+        </ion-col>
+      </ion-row>
+
+    </div>
+
+    <div class="ToMessage" *ngIf="message.from_market_id">
+
+      <ion-row>
+
+        <ion-col size="2" style="height: 65px;">
+          <img *ngIf="MarketData.Image" [src]="ImageLink + '/' + MarketData?.Image.for + '/' + MarketData?.Image.name"
+            #imgProf4 (error)="imgProf4.src = './assets/img/user.png'">
+
+          <img *ngIf="!MarketData.Image" src="./assets/img/user.png">
+        </ion-col>
+
+        <ion-col size="9">
+          <span class="MessageTime"> {{message?.createdAt | date:'short'}} </span>
+          <div *ngIf="message?.type == 'message'" >
+            <p [innerHTML]="message.text"></p>
+          </div>
+
+          <img class="ImageChat" #imgProf3 (error)="imgProf3.src = './assets/img/user.png'"
+            *ngIf="message?.type == 'image'" [src]="ImageLink + '/' + message?.image?.for + '/' + message?.image?.name">
+        </ion-col>
+
+        <ion-col size="1">
+        </ion-col>
+      </ion-row>
+    </div>
+  </ng-container>
+
+</ion-content>
+
+
+<ion-footer no-border [style.height]="showEmojiPicker ? '255px' : '55px'">
+  <ion-row>
+    <ion-col size="2" class="SendItem">
+      <ion-button fill="none" (click)="SendMessage()">
+        <ion-icon name="send" color="primary" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-col>
+
+    <ion-col size="10" class="HappyFooter">
+
+      <ion-button fill="none">
+        <ion-icon color="primary" slot="icon-only" name="md-happy"></ion-icon>
+      </ion-button>
+
+      <ion-item class="InputItem">
+        <ion-input #chat_input dir="rtl" type="text" (ionFocus)="onFocus()" placeholder="اكتب رسالتك هنا"
+          [(ngModel)]="Message">
+        </ion-input>
+      </ion-item>
+
+      <ion-button fill="none" (click)="ongetNewImage()">
+        <ion-icon color="primary" name="camera"> </ion-icon>
+      </ion-button>
+
+    </ion-col>
+  </ion-row>
+  <!-- <emoji-picker *ngIf="showEmojiPicker" [(ngModel)]="Message">
+        </emoji-picker> -->
+</ion-footer>

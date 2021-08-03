@@ -1,0 +1,97 @@
+<ion-header>
+  <ion-toolbar color="grey">
+    <ion-title color="primary"> فرصة بيع </ion-title>
+    <ion-row>
+      <ion-col size="1">
+        <div class="header-icon">
+          <!-- <ion-icon name="menu" color="primary"></ion-icon> -->
+          <ion-menu-button name="menu" color="primary"></ion-menu-button>
+        </div>
+      </ion-col>
+      <ion-col size="9">
+        <ion-searchbar placeholder="البحث"></ion-searchbar>
+      </ion-col>
+      <ion-col size="2">
+        <div class="header-icon" routerLink="/notifications">
+          <ion-badge *ngIf="countNotification > 0">{{countNotification}}</ion-badge>
+          <ion-icon name="notifications" color="primary"></ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="offer-reply">
+  <ion-list padding lines="none">
+
+    <ion-item [ngClass]="{'active' : price.offer_price_replay && price.offer_price_replay[0]}">
+      <ion-grid>
+      	<ion-row>
+          <ion-col size="8">
+          	<ion-text class="username">
+                {{ user_name }}
+          	</ion-text>
+            <p class="price-date" >
+              {{ price.createdAt | date: 'dd/MM/yyyy' }}
+            </p>
+          </ion-col>
+          <ion-col size="4">
+            <p class="price-date" >
+              {{ price.createdAt | date: 'h:mm a' }}
+            </p>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col size="9">
+				    <ion-text class="desc">{{ price.description }}</ion-text>
+        	</ion-col>
+      		<ion-col *ngIf="price.image" size="3">
+          	<img [src]="ImageBase + '/'  + price.image.for + '/'  + price.image.name ">
+        	</ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+		<div class="reply" *ngFor="let reply of replies" [ngClass]="{'pink' : reply.market_id == market_id}">
+	  	<ion-row>
+	      <ion-col size="8">
+	        <p class="price-date" >
+	          {{ reply.createdAt | date: 'dd/MM/yyyy' }}
+	        </p>
+	      </ion-col>
+	      <ion-col size="4">
+	        <p class="price-date" >
+	          {{ reply.createdAt | date: 'h:mm a' }}
+	        </p>
+	      </ion-col>
+	    </ion-row>
+      <ion-row>
+          <ion-col size="9">
+            <ion-text class="desc">{{ reply.comment }}</ion-text>
+          </ion-col>
+          <ion-col *ngIf="reply.image" size="3">
+            <img [src]="ImageBase + '/'  + reply.image.for + '/'  + reply.image.name ">
+          </ion-col>
+        </ion-row>
+		</div>
+
+		<ion-item [ngClass]="{'active' : price.offer_price_replay && price.offer_price_replay[0]}">
+	      <ion-textarea type="text" *ngIf="replies?.length > 0" placeholder="أضف عرضا جديدا.... " [(ngModel)]="ReplayData.comment"></ion-textarea>
+        <ion-textarea type="text" *ngIf="replies?.length <= 0" placeholder="أضف عرضا .... " [(ngModel)]="ReplayData.comment"></ion-textarea>
+        <ion-button fill="none" (click)="OpenImage()">
+          <ion-icon color="primary" name="camera"> </ion-icon>
+        </ion-button>
+    </ion-item>
+
+    <ion-button expand="block" class="add-btn" (click)="onSendReplayClicked()">
+      <ion-icon color="light" name="arrow-dropleft-circle"></ion-icon>
+      <ion-label color="light" *ngIf="replies?.length > 0" class="ion-padding">
+        اضافة عرضا جديدا
+      </ion-label>
+      <ion-label color="light" *ngIf="replies?.length <= 0" class="ion-padding">
+        اضافة
+      </ion-label>
+    </ion-button>
+
+	</ion-list>
+</ion-content>

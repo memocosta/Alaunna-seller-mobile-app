@@ -1,0 +1,86 @@
+ion-select{
+    background-color: #fff;
+    border-radius: 10px;
+    padding:10px;
+    color: var(--ion-color-primary)
+}
+.myoffers ion-card{
+    border-radius: 15px;
+    width: 100%;
+    margin: 10px 0;
+}
+.myoffers ion-card ion-card-title{
+    margin-bottom: 10px
+}
+.myoffers ion-card p{ 
+    line-height: 1;
+}
+.myoffers ion-card .popover-btn{ 
+    font-size: 20px
+}
+.myoffers .card-content-md{
+    padding-top: 0;
+}
+.item.item-trns{
+    background-color: rgba($color: #000000, $alpha: 0);
+}
+.myoffers ion-item-option{
+    border-radius: 10px;
+    margin: 0 2px;
+    width: 80px;
+    ion-label{
+        font-size: 12px
+    }
+    ion-icon{
+        font-size: 24px
+    }
+    .add-btn{
+        margin-top: 20px;
+        color: #fff;
+    }
+}
+.share-icon{
+    text-align: left;
+    font-size: 1.4em;
+    ion-icon{
+        font-weight: 500;
+    }
+}
+
+.no-adds{
+    text-align: center;
+    margin-top: 30%;
+    width: 100%;
+    img{
+        display: block;
+        width: 70%;
+        margin: auto;
+    }
+    p{
+        color: #999;
+        font-size: .9em;
+    }
+    a{
+        color: #4d94ec;
+        font-size: 1em;
+        font-weight: 400;
+        text-decoration: none;
+    }
+    
+}
+.title-1 {
+    font-size: larger;
+    font-weight: 600;
+    color: black;
+}
+.title-1 span {
+    font-size: small;
+    padding: 10px;
+    font-weight: 300;
+}
+.title-1 span.green {
+    color: green;
+}
+.title-1 span.red {
+    color: red;
+}

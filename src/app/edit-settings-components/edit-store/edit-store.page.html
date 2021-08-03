@@ -1,0 +1,46 @@
+<ion-content>
+  <ion-button routerLink="/settings">
+    <ion-icon name="arrow-back"></ion-icon>
+    <ion-text class="text"> المخزون واستلام الطلبات</ion-text>
+  </ion-button>
+  <ion-card>
+    <ion-item lines="none">
+      <ion-label class="text-d" color="primary">
+        عنوان 1
+      </ion-label>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label class="text-m" *ngIf="MarketData.Country">
+        {{MarketData.Country.name}} - <ng-container *ngIf="MarketData.City">{{MarketData.City.name}}</ng-container>
+
+      </ion-label>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label>
+        {{MarketData.address}}
+      </ion-label>
+    </ion-item>
+  </ion-card>
+  <ion-card *ngFor="let address of myAddress">
+    <ion-icon (click)="removeItems(address.id)" class="trash" name="trash"></ion-icon>
+    <ion-item lines="none">
+      <ion-label class="text-d" color="primary">
+        {{address.name}}
+      </ion-label>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label class="text-m">
+        {{address.country.name}} - {{address.city.name}}
+      </ion-label>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label>
+        {{address.address}}
+      </ion-label>
+    </ion-item>
+  </ion-card>
+  <section>
+    <ion-button routerLink="/new-address" expand="block" style="position: fixed;
+    bottom: 70px;">اضافه عنوان جديد</ion-button>
+  </section>
+</ion-content>

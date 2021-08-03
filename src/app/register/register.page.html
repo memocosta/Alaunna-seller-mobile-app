@@ -1,0 +1,93 @@
+<ion-content color="light">
+  <div class="login-logo">
+    <img src="assets/img/Group 2823.png" alt="">
+  </div>
+  <ion-text color="primary">
+    <h6 class="text-center">إنشاء حساب</h6>
+  </ion-text>
+  <div class="form-container">
+    <form [formGroup]="RegisterForm" novalidate (submit)="onRegisterPressed()">
+      <ion-list lines="none">
+        <ion-item>
+          <ion-label position="stacked">إسم صاحب المتجر</ion-label>
+          <ion-input placeholder="إسم صاحب المتجر" type="text" name="name" formControlName="name"
+            [(ngModel)]="RegisterationData.name"></ion-input>
+        </ion-item>
+        <div class="error-box"
+          *ngIf="RegisterForm.controls['name'].hasError('required') && RegisterForm.controls['name'].touched">
+          اسم المستخدم مطلوب* </div>
+
+        <!-- <ion-item>
+          <ion-label position="stacked">البريد الالكتروني</ion-label>
+          <ion-input placeholder="user@domain.com" type="email" name="email" formControlName="email"
+            [(ngModel)]="RegisterationData.email"></ion-input>
+        </ion-item> -->
+
+        <ion-item>
+          <ion-label position="stacked">رقم الهاتف</ion-label>
+          <ion-input placeholder="0123456789" type="tel" name="phone" formControlName="phone"
+            [(ngModel)]="RegisterationData.phone"></ion-input>
+        </ion-item>
+        
+        <div class="error-box"
+          *ngIf="RegisterForm.controls['phone'].hasError('required') && RegisterForm.controls['phone'].touched">
+          *رقم الهاتف مطلوب!</div>
+        <div class="error-box"
+          *ngIf="RegisterForm.controls['phone'].hasError('maxlength') && RegisterForm.controls['phone'].touched">
+          *رقم الهاتف لا يجب ان يكون اكبر من 11 رقم!</div>
+        <div class="error-box"
+          *ngIf="RegisterForm.controls['phone'].hasError('minlength') && RegisterForm.controls['phone'].touched">
+          *رقم الهاتف لا يجب ان يكون اقل من 11 رقم!</div>
+
+        <ion-item>
+          <ion-label position="stacked">الرقم السري</ion-label>
+          <ion-input placeholder="xxxxxxxxx" type="password" name="password"
+            formControlName="password" [(ngModel)]="RegisterationData.password" ></ion-input>
+        </ion-item>
+        <div class="error-box"
+          *ngIf="RegisterForm.controls['password'].hasError('required') && RegisterForm.controls['password'].touched">
+          *الرقم السري مطلوب مطلوب!</div>
+
+        <ion-item>
+          <ion-label position="stacked"> تأكيد الرقم السري</ion-label>
+          <ion-input placeholder="xxxxxxxxx" type="password" name="passwordConfirm" formControlName="passwordConfirm"
+            [(ngModel)]="RegisterationData.passwordConfirm"></ion-input>
+        </ion-item>
+        <div class="error-box"
+          *ngIf="RegisterForm.controls['passwordConfirm'].hasError('required') && RegisterForm.controls['passwordConfirm'].touched">
+          تاكيد الرقم السري مطلوب*!</div>
+
+        <ion-item class="OneItem">
+          <ion-label> التصنيف </ion-label>
+          <ion-select [(ngModel)]="RegisterationData.category_market"
+            [formControl]="RegisterForm.controls['category_market']" interface="action-sheet" cancelText="الغاء">
+            <!-- <ion-option *ngFor="let cat of MarketCategoies" [value]="cat.id"> {{cat.name}} </ion-option> -->
+            <ion-select-option *ngFor="let cat of MarketCategoies" [value]="cat.id"> {{cat.name}} </ion-select-option>
+          </ion-select>
+        </ion-item>
+
+        <ion-item>
+          <p class="notice">بإنشاء حسابك فإنك توافق علي سياسة الاستخدام والخصوصية المرفقة <a href="https://alaunna.com/terms">هنا</a>.</p>
+        </ion-item>
+
+        <ion-button expand="block" class="sign-btn" type="submit">
+          <ion-icon color="light" name="arrow-dropleft-circle"></ion-icon>
+          <ion-label color="light" class="ion-padding">إنشاء الحساب</ion-label>
+        </ion-button>
+
+        <h6 class="text-center">لديك حساب بالفعل؟<a routerLink="/login" routerLinkActive="active"> تسجيل دخول </a></h6>
+      </ion-list>
+    </form>
+
+    <!-- final facebook btn  -->
+    <!-- <div class="fb-btn">
+      <ion-button expand="full" color="secondary" (click)="fbLogin()">
+        <span>أنشاء حساب بأستخدام </span>
+        <ion-icon name="logo-facebook"></ion-icon>
+      </ion-button>
+    </div>
+    <br><br> -->
+
+  </div>
+
+</ion-content>

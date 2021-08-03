@@ -1,0 +1,45 @@
+ion-menu {
+    ion-item {
+        color: #7D2468
+    }
+    ion-toolbar {
+        .background {
+            filter: blur(5px);
+        }
+    }
+    .UserImage {
+        width: 100%;
+        border-radius: 10px;
+    }
+    .userData {
+        position: absolute;
+    }
+    ion-grid {
+        position: absolute;
+        bottom: 0px;
+        width: 100%;
+    }
+}
+.bottom-bar a {
+    position: relative;
+}
+.tabbadge{
+    position: absolute;
+    top: -5px;
+    left: 5px;
+    background: red;
+    color: #fff;
+}
+ion-icon{
+    margin-left: 8px
+}
+.footer{
+    text-align: center;
+    color: #fff;
+    background: #7D2468;
+    height: 37px;
+    padding: 5px;
+}
+.footer ion-label{
+    font-family: unset;
+}

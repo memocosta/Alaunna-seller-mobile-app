@@ -1,0 +1,164 @@
+<ion-app>
+  <ion-row class="head-order">
+    <ion-col>
+      <ion-button (click)="back()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col class="done-order">
+      <ion-text class="text"> اتمام الطلب</ion-text>
+
+    </ion-col>
+    <ion-col>
+
+      <ion-button (click)="orderDone()">
+        <ion-text class="text"> موافق</ion-text>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+  <ng-container>
+    <ng-container>
+      <ion-card color="light">
+        <ion-card-content class="ion-no-padding">
+          <ion-grid>
+            <ion-row>
+              <ion-header>
+                <ion-title>
+                  تم انشاء سله الطلب
+                </ion-title>
+              </ion-header>
+              <ion-col size="12" class="ion-text-center">
+                <ion-text style="display: block;font-size: 18px;padding: 16px;">
+                  الان قم بإرسال الرابط التالي لعميلك ليقوم بإكمال الطلب
+                </ion-text>
+              </ion-col>
+              <ion-col class="ion-text-center">
+                <ion-text href="#" *ngIf="last_id">
+                  {{url}}{{last_id}}</ion-text>
+              </ion-col>
+              <ion-col size="12" class="ion-text-center">
+                <ion-text style="font-size: 18px;">ارسل بواسطه</ion-text>
+              </ion-col>
+              <ion-col size="12" class="ion-text-center" style="display: grid;font-size: 18px;">
+                <ion-col style="display: flex;
+                align-items: center;
+                justify-content: center;
+                justify-content: space-between;">
+                  <ion-icon name="logo-whatsapp" (click)="whatsapp()"></ion-icon>
+                  <ion-icon style="margin-left: 20px;" name="chatboxes" (click)="sendSms()"></ion-icon>
+                </ion-col>
+                <ion-col style="display: flex;
+                align-items: center;
+                justify-content: center;
+                justify-content: space-between;">
+                  <ion-text (click)="whatsapp()">واتساب</ion-text>
+                  <ion-text (click)="sendSms()"> رساله قصيره</ion-text>
+                </ion-col>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
+  </ng-container>
+  <ng-container>
+    <ion-card color="light">
+      <ion-card-content class="ion-no-padding" style="font-size: 20px;">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12" class="ion-text-right">
+              <ion-text style="display: block" *ngIf="OfferData.client">
+                العميل : <ion-text> {{OfferData.client.name}}</ion-text>
+              </ion-text>
+            </ion-col>
+            <ion-col size="12" class="ion-text-right">
+              <ion-text style="display: block" *ngIf="OfferData.client">
+                رقم الهاتف : <ion-text> {{OfferData.client.phone}} </ion-text>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+  <ion-content class="myorders-page">
+    <ng-container>
+      <ng-container>
+        <ion-card color="light">
+          <ion-card-content class="ion-no-padding">
+            <ion-grid>
+              <ion-row>
+                <div class="orders">
+                  <ion-item style="width:100%" class="orders">
+                    <ion-row style="width:100%">
+                      <ion-col>
+                        <div>
+                          المنتجات
+                        </div>
+                      </ion-col>
+                      <ion-col>
+                        <div>الكميه</div>
+                      </ion-col>
+                      <ion-col>
+                        <div>السعر</div>
+                      </ion-col>
+                    </ion-row>
+                  </ion-item>
+                  <ng-container *ngIf="OfferData.products_data?.length > 0">
+                    <ion-item class="orders" *ngFor="let product of OfferData.products_data;let i = index"
+                      [id]="'product'+i">
+                      <ion-row>
+                        <ion-col>
+                          <div>
+                            <img *ngIf="!product.images || !product.images[0]" class="background"
+                              src="assets/img/default.png">
+                            <img *ngIf="product.images && product.images[0]" class="background"
+                              [src]="ImgeBase + '/' + product.images[0].for  + '/big/' + product.images[0].name"
+                              [alt]="product.images[0].alt">
+                          </div>
+                        </ion-col>
+                        <ion-col>
+                          <div>1</div>
+                        </ion-col>
+                        <ion-col>
+                          <div>
+                            <ion-card-subtitle color="primary" dir="rtl">
+                              <span *ngIf="product.offer" class="ion-padding-horizontal">{{
+                                (product['market'][0]['Market_Products']['Selling_price']-(product['market'][0]['Market_Products']['Selling_price']*product.offer.value/100))
+                                }}
+                                EGP</span> <br>
+                              <del *ngIf="product.offer && product.offer.value != 0">{{
+                                product['market'][0]['Market_Products']['Selling_price'] }}
+                                EGP</del>
+                              <span *ngIf="!product.offer">{{ product['market'][0]['Market_Products']['Selling_price']
+                                }}
+                                EGP</span>
+                            </ion-card-subtitle>
+                          </div>
+                        </ion-col>
+                      </ion-row>
+                    </ion-item>
+                  </ng-container>
+                  <ion-row>
+                    <ion-col>
+                      <div>
+                        الاجمالي
+                      </div>
+                    </ion-col>
+                    <ion-col>
+                      <div>{{OfferData.products_data?.length}}</div>
+                    </ion-col>
+                    <ion-col>
+                      <div>{{total_sum}} EGP</div>
+                    </ion-col>
+                  </ion-row>
+                </div>
+              </ion-row>
+            </ion-grid>
+          </ion-card-content>
+        </ion-card>
+      </ng-container>
+    </ng-container>
+  </ion-content>
+  <!---->
+</ion-app>

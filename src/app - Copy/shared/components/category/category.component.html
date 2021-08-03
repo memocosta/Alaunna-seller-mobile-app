@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar color="grey">
+    <ion-buttons slot="start">
+      <ion-button (click)="modalController.dismiss()" color="danger">
+        <ion-icon slot="icon-only" name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title color="primary">التصنيفات</ion-title>
+    <ion-buttons slot="end">
+      <ion-button color="success" (click)="DoneSelecteing('')">
+        <ion-icon slot="icon-only" name="checkmark"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="cat-page">
+  <ion-list color="none" lines="none">
+    <ng-container *ngIf="!fitlerOBJ.category_id">
+      <ion-item color="none" *ngFor="let cat of categories"
+        (click)="selectedItems.category = cat;LoadProductSubCategory(cat.id)">
+        <ion-icon slot="end" name="arrow-forward"></ion-icon>
+        <ion-label>
+          {{ cat.name }}
+        </ion-label>
+      </ion-item>
+    </ng-container>
+
+    <ng-container *ngIf="!fitlerOBJ.subcategory_id">
+      <ion-item color="none" *ngFor="let subcat of subcategories"
+        (click)="selectedItems.subcategory = subcat;LoadProductSubSubcategroy(subcat.id)">
+        <ion-icon slot="end" name="arrow-forward"></ion-icon>
+        <ion-label>
+          {{ subcat.name }}
+        </ion-label>
+      </ion-item>
+    </ng-container>
+
+    <ng-container *ngIf="!fitlerOBJ.subsubcategory_id">
+      <ion-item color="none" *ngFor="let subsubcat of subsubcategories"
+        (click)="selectedItems.subsubcategory = subsubcat;DoneSelecteing(subsubcat.id)">
+        <ion-icon slot="end" name="arrow-forward"></ion-icon>
+        <ion-label>
+          {{ subsubcat.name }}
+        </ion-label>
+      </ion-item>
+    </ng-container>
+  </ion-list>
+</ion-content>

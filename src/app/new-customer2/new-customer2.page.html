@@ -1,0 +1,33 @@
+<ion-content>
+  <ion-button (click)="back()">
+    <ion-icon name="arrow-back"></ion-icon>
+    <ion-text class="text">اضافه عميل جديد</ion-text>
+  </ion-button>
+
+  <ion-list>
+    <ion-item routerLink="/add-new-customer2">
+      <ion-icon class="icon" name="person"></ion-icon>
+      <ion-label> عميل جديد
+      </ion-label>
+    </ion-item>
+    <ion-item (click)="getContactList()">
+      <ion-icon class="icon" name="menu"></ion-icon>
+      <ion-label> اضافه من جهات الاتصال
+      </ion-label>
+    </ion-item>
+  </ion-list>
+  <ion-list *ngIf="contactsfound?.length > 0">
+    <ion-list-header>Follow us on Contact List</ion-list-header>
+    <ion-select okText="تم" cancelText="الغاء" [(ngModel)]="contact_list" multiple="true">
+      <ng-container *ngFor="let item of contactsfound">
+        <ion-select-option value="{{item.displayName}}&&{{item.phoneNumbers[0].value}}"
+          *ngIf="item.phoneNumbers?.length > 0"> {{item.displayName}} - {{item.phoneNumbers[0].value}}
+        </ion-select-option>
+      </ng-container>
+    </ion-select>
+    <ion-button expand="block" class="sign-btn" (click)="createMany()">
+      <ion-icon color="light" name="arrow-dropleft-circle"></ion-icon>
+      <ion-label color="light" class="ion-padding"> حفظ </ion-label>
+    </ion-button>
+  </ion-list>
+</ion-content>

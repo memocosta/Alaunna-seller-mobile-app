@@ -1,0 +1,33 @@
+<!--
+  Generated template for the OfferPriceReplayCreatePage page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-toolbar lines="none">
+    <ion-title> {{ PriceData.name }} </ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+
+<ion-content>
+  <div style="padding-top:5%;">
+    <ion-textarea type="text" placeholder="تعليقك" [(ngModel)]="ReplayData.comment"></ion-textarea>
+
+    <label class="addImg" (click)="OpenImage()" *ngIf="!PriceData.image">
+        <ion-icon name="photos"></ion-icon>
+      </label>
+      <img *ngIf="PriceData.image" class="addImg" [src]="'data:image/jpeg;base64,' + PriceData.image.base64">
+
+    <ion-button expand="block" class="add-btn" (click)="onSendReplayClicked()">
+      <ion-icon color="light" name="arrow-dropleft-circle"></ion-icon>
+      <ion-label color="light" class="ion-padding">
+        اضافه التعليق
+      </ion-label>
+    </ion-button>
+  </div>
+
+</ion-content>

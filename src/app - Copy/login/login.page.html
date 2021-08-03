@@ -1,0 +1,99 @@
+<ion-content color="light">
+  <div class="login-logo">
+    <img src="assets/img/Group 2823.png" alt="">
+  </div>
+  <ion-text color="primary">
+    <h6 class="text-center">تسجيل دخول</h6>
+  </ion-text>
+  <div class="form-container">
+
+    <form [formGroup]="LoginForm" novalidate (submit)="onLoginPressed()">
+      <ion-list lines="none">
+        <ion-item>
+          <ion-label position="stacked">رقم الهاتف</ion-label>
+          <ion-input placeholder="0123456789" name="phone" formControlName="phone" type="tel"
+            [(ngModel)]="LoginData.phone"></ion-input>
+        </ion-item>
+        <div class="error-box"
+          *ngIf="LoginForm.controls['phone'].hasError('required') && LoginForm.controls['phone'].touched">
+          *رقم الهاتف مطلوب!</div>
+        <div class="error-box"
+          *ngIf="LoginForm.controls['phone'].hasError('maxlength') && LoginForm.controls['phone'].touched">
+          *رقم الهاتف لا يجب ان يكون اكبر من 11 رقم!</div>
+        <div class="error-box"
+          *ngIf="LoginForm.controls['phone'].hasError('minlength') && LoginForm.controls['phone'].touched">
+          *رقم الهاتف لا يجب ان يكون اقل من 11 رقم!</div>
+        <ion-item>
+          <ion-label position="stacked">الرقم السري</ion-label>
+          <ion-input placeholder="xxxxxxxxx" type="password" name="password" formControlName="password"
+            [(ngModel)]="LoginData.password"></ion-input>
+
+        </ion-item>
+        <div class="error-box"
+          *ngIf="LoginForm.controls['password'].hasError('required') && LoginForm.controls['password'].touched">*
+          *كلمة السر مطلوبة!</div>
+        <ion-item>
+          <ion-label>تذكرني</ion-label>
+          <ion-checkbox color="primary" slot="start" name="remeber_me" formControlName="remeber_me" [(ngModel)]="LoginData.remeber_me" ></ion-checkbox>
+        </ion-item>
+        <ion-text class="text-center" (click)="forgetPassword()">
+          <h6><a>نسيت كلمة السر؟</a></h6>
+        </ion-text>
+        <ion-button expand="block" class="sign-btn" [disabled]="!LoginForm.valid" type="submit">
+          <ion-icon color="light" name="arrow-dropleft-circle"></ion-icon>
+          <ion-label color="light" class="ion-padding">
+            تسجيل دخول
+          </ion-label>
+        </ion-button>
+        <ion-text class="text-center">
+          <h6>ليس لديك حساب ؟ <a routerLink="/register" routerLinkActive="active"> سجل الان </a></h6>
+        </ion-text>
+      </ion-list>
+    </form>
+<!-- 
+    <div class="ion-padding" *ngIf="isLoggedIn === true">
+      <ion-card>
+        <ion-card-header>
+          <ion-card-subtitle>Hi, {{users.name}}</ion-card-subtitle>
+          <ion-card-title>{{users.email}}</ion-card-title>
+        </ion-card-header>
+        
+        <ion-card-content>
+          <p>
+            <ion-button expand="full" color="secondary" (click)="logout()">
+              Logout
+              <ion-icon name="log-out"></ion-icon>
+            </ion-button>
+          </p>
+        </ion-card-content>
+      </ion-card>
+    </div>
+    <div class="ion-padding" >
+      <P>isLoggedIn: {{isLoggedIn}}</P>
+      <P>users: {{users}}</P>
+      <P>users_str: {{users_str}}</P>
+      <P>user_id: {{user_id}}</P>
+      <P>err1: {{err1}}</P>
+      <P>err2: {{err2}}</P>
+      <P>err3: {{err3}}</P>
+      <P>fb_user_id: {{fb_user_id}}</P>
+      <P>fb_name: {{fb_name}}</P>
+      <P>fb_email: {{fb_email}}</P>
+      <P>res: {{res}}</P>
+    </div>  -->
+
+
+    <!-- final facebook btn  -->
+    <!-- <div class="fb-btn">
+      <ion-button expand="full" color="secondary" (click)="fbLogin()">
+        <span>تسجيل الدخول بأستخدام </span>
+        <ion-icon name="logo-facebook"></ion-icon>
+      </ion-button>
+    </div>
+    <br><br> -->
+
+
+
+  </div>
+
+</ion-content>

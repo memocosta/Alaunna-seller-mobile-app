@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-toolbar color="grey">
+    <ion-buttons slot="start">
+      <ion-button color="success" (click)="onDonePreseed()">
+        <div class="all-icon">
+          <div class="icon-div">
+            <ion-icon slot="icon-only" name="checkmark"></ion-icon>
+          </div>
+          <label>تم</label>
+        </div>
+      </ion-button>
+    </ion-buttons>
+    <ion-title color="primary">تعديل أختيارات المنتجات</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()" color="danger">
+        <div class="all-icon">
+          <div class="icon-div">
+            <ion-icon slot="icon-only" name="close"></ion-icon>
+          </div>
+          <label>الغاء</label>
+        </div>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="myproducts">
+  <ion-list class="item item-trns" lines="none">
+    <ion-item-sliding *ngFor="let product of Products;let i = index" [id]="'product'+i" #Product color="none">
+      <ion-item color="none" [id]="'item' + i">
+        <ion-card color="light" >
+          <ion-grid >
+            <ion-row >
+              <ion-col size="4">
+                <img *ngIf="!product.images || !product.images[0]"
+                  src="assets/img/default.png">
+                <img *ngIf="product.images && product.images[0]"
+                  [src]="ImgeBase + '/' + product.images[0].for  + '/big/' + product.images[0].name"
+                  [alt]="product.images[0].alt">
+              </ion-col>
+              <ion-col size="7">
+                <ion-card-content>
+                  <ion-card-title color="primary">
+                    {{ product.name.substr(0 , 20) }}
+                  </ion-card-title>
+                  <ion-card-subtitle>
+                    <p>{{product.description}}</p>
+                  </ion-card-subtitle>
+                  <ion-card-subtitle color="primary" dir="rtl"><p>سعر البيع</p>
+                    <span *ngIf="OfferData" class="">{{ (product['market'][0]['Market_Products']['Selling_price']-(product['market'][0]['Market_Products']['Selling_price']*OfferData.value/100)) }}EGP </span>
+                    <del *ngIf="OfferData && OfferData.value != 0" > {{ product['market'][0]['Market_Products']['Selling_price'] }}EGP</del>
+                    <span *ngIf="!OfferData&&type!='coupon'"> {{ product['market'][0]['Market_Products']['Selling_price'] }}EGP</span>  
+                  </ion-card-subtitle>
+                  <ion-card-subtitle *ngIf="OfferData">
+                    {{OfferData.title}}
+                  </ion-card-subtitle>
+                  
+                </ion-card-content>
+              </ion-col>
+              <ion-col size="1">
+                <a class="popover-btn check-btn" >
+                  <ion-checkbox [checked]="(selectedproducts.indexOf(product.id) !== -1)" (ionChange)="onSelectProductChange($event,product.id)"></ion-checkbox>
+                </a>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+          <ion-icon color="danger" *ngIf="product.status != 'active'" class="not-active-icon" name="eye-off"></ion-icon>
+        </ion-card>
+      </ion-item>
+      
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

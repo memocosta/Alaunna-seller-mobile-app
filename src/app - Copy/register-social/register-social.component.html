@@ -1,0 +1,42 @@
+<ion-content color="light">
+  <div class="login-logo">
+    <img src="assets/img/Group 2823.png" alt="">
+  </div>
+  <ion-text color="primary">
+    <h6 class="text-center">أهلا {{RegisterationData.name}} برجاء أدخال حقل التليفون الخاص بك لاستكمال عملية التسجيل</h6>
+  </ion-text>
+  <div class="form-container">
+    <form [formGroup]="RegisterForm" novalidate (submit)="onRegisterPressed()">
+      <ion-list lines="none">
+        <ion-item>
+          <ion-label position="stacked">رقم الهاتف</ion-label>
+          <ion-input placeholder="0123456789" type="tel" name="phone" formControlName="phone"
+            [(ngModel)]="RegisterationData.phone"></ion-input>
+        </ion-item>
+        
+        <div class="error-box"
+          *ngIf="RegisterForm.controls['phone'].hasError('required') && RegisterForm.controls['phone'].touched">
+          *رقم الهاتف مطلوب!</div>
+        <div class="error-box"
+          *ngIf="RegisterForm.controls['phone'].hasError('maxlength') && RegisterForm.controls['phone'].touched">
+          *رقم الهاتف لا يجب ان يكون اكبر من 11 رقم!</div>
+        <div class="error-box"
+          *ngIf="RegisterForm.controls['phone'].hasError('minlength') && RegisterForm.controls['phone'].touched">
+          *رقم الهاتف لا يجب ان يكون اقل من 11 رقم!</div>
+
+        <ion-item>
+          <p class="notice">بإنشاء حسابك فإنك توافق علي سياسة الاستخدام والخصوصية المرفقة <a href="https://alaunna.com/terms">هنا</a>.</p>
+        </ion-item>
+
+        <ion-button expand="block" class="sign-btn" type="submit">
+          <ion-icon color="light" name="arrow-dropleft-circle"></ion-icon>
+          <ion-label color="light" class="ion-padding">إنشاء الحساب</ion-label>
+        </ion-button>
+
+        <h6 class="text-center">لديك حساب بالفعل؟<a routerLink="/login" routerLinkActive="active"> تسجيل دخول </a></h6>
+      </ion-list>
+    </form>
+
+  </div>
+
+</ion-content>

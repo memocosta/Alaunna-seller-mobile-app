@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar color="grey">
+    <ion-title color="primary">إضافة منتج</ion-title>
+    <ion-row>
+      <ion-col size="1">
+        <div class="header-icon">
+          <!-- <img src="assets/img/icn_menu_dark.png" alt=""> -->
+          <ion-menu-button name="menu" color="primary"></ion-menu-button>
+        </div>
+      </ion-col>
+      <ion-col size="9">
+        <ion-searchbar placeholder="البحث" ></ion-searchbar>
+      </ion-col>
+      <ion-col size="2">
+        <div class="header-icon" routerLink="/notifications">
+          <ion-badge *ngIf="countNotification > 0">{{countNotification}}</ion-badge>
+          <ion-icon name="notifications" color="primary"></ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="add-page">
+  <ion-list padding lines="none">
+    <ion-item routerLink="/addproduct" routerLink="/add-single-product" >
+      <img src="assets/img/new.png">
+      <ion-label color="primary">
+        منتج جديد
+      </ion-label>
+    </ion-item>
+    <!-- <ion-item (click)="buttonClick()">
+      <img src="assets/img/same.png">
+      <ion-label color="primary">
+        منتج مماثل
+      </ion-label>
+    </ion-item> -->
+    <!-- <ion-item routerLink="/alauuna-products">
+      <img src="assets/img/alauuna-prod.png">
+      <ion-label color="primary">
+        منتجات ألاونا
+      </ion-label>
+    </ion-item> -->
+  </ion-list>
+
+</ion-content>

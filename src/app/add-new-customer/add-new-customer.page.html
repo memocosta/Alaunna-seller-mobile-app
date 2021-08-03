@@ -1,0 +1,17 @@
+<ion-content >
+  <ion-button routerLink="/contact-list">
+    <ion-icon name="arrow-back"></ion-icon>
+    <ion-text class="text">اضافه عميل جديد</ion-text>
+  </ion-button>  
+  <ion-grid>
+    <ion-label> الاسم
+    </ion-label>
+  <ion-input type="text" placeholder="اسم العميل "   [(ngModel)]="customer.name"></ion-input>
+  <ion-label> رقم الهاتف
+  </ion-label>
+  <ion-input type="number" placeholder="رقم هاتف العميل " [(ngModel)]="customer.phone"></ion-input>
+  </ion-grid>
+ <ion-button (click)="onNewCustomer()">
+      تسجيل 
+  </ion-button>
+</ion-content>

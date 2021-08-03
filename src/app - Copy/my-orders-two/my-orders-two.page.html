@@ -1,0 +1,48 @@
+<ion-content>
+
+<ion-button class="button-customer" routerLink="/contact-list">
+  <ion-icon name="arrow-back"></ion-icon>
+  <ion-text class="text">بيانات العميل</ion-text>
+</ion-button>
+<ng-container>
+  <ng-container>
+    <ion-card color="light">
+      <ion-card-content class="ion-no-padding">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="12" class="ion-text-right">
+              <ion-text style="display: block">
+                يمكنك تلقي الطلبات هنا ! 
+              </ion-text>
+            </ion-col>
+            <ion-col size="12" class="ion-text-right">
+              <ion-text style="display: block;margin-bottom: 18px;">
+                كما يمكنك إنشاء طلبات لعملائك على الااونا أو عميل جديد 
+              </ion-text>
+            </ion-col>
+            <ion-col size="12" class="ion-text-right">
+              <ion-button class="button" routerLink="/new-customer" color="success">
+                <ion-icon name="add"></ion-icon>
+                إنشاء طلب لعمیل
+              </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+</ng-container>
+<ion-row class="orders">
+  <ion-col>
+    <ion-icon style=" background: #80808047;" name="menu"></ion-icon>
+  </ion-col>
+  <ion-col>
+    <div>
+    لا يوجد طلبات حتي الان ! </div>
+  </ion-col>
+  <ion-col>
+    <div> 
+      عندما يطلب اشخاص منتجاتك ، سترى التفاصيل هنا .</div>
+  </ion-col>
+</ion-row>
+</ion-content>

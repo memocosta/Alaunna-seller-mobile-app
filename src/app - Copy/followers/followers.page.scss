@@ -1,0 +1,19 @@
+.followers{
+    background: transparent !important;
+    .item .item-content {
+        background-color: transparent !important;
+      }
+    ion-item{
+        --background: transparent !important;
+        .item-native{background: transparent !important;}
+        ion-label{
+        }
+        h2{
+            font-size: 1em;
+            font-weight: 500;
+        }
+        p{
+            font-size: .8em;
+        }
+    }
+}

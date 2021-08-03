@@ -1,0 +1,99 @@
+<ion-header>
+  <ion-toolbar color="grey">
+    <ion-title color="primary">طلباتي</ion-title>
+    <ion-row>
+      <ion-col size="1">
+        <div class="header-icon">
+          <!-- <ion-icon name="menu" color="primary"></ion-icon> -->
+          <ion-menu-button name="menu" color="primary"></ion-menu-button>
+        </div>
+      </ion-col>
+      <ion-col size="9">
+        <ion-searchbar placeholder="البحث"></ion-searchbar>
+      </ion-col>
+      <ion-col size="2">
+        <div class="header-icon" routerLink="/notifications">
+          <ion-badge *ngIf="countNotification > 0">{{countNotification}}</ion-badge>
+          <ion-icon name="notifications" color="primary"></ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="myorders-page">
+  <!-- if no data this div will appear -->
+
+  <!-- <div class="nodata">
+    <img src="assets/img/Group 2769.png" alt="">
+    <h5>لا يوجد لديك طلبات حتى الان</h5>
+  </div> -->
+
+  <!-- if no data this div will appear -->
+  <ng-container *ngFor="let order of Orders">
+    <ng-container *ngIf="order.owner">
+      <ion-card color="light" (click)="orderdetails(order.id)">
+        <ion-card-content class="ion-no-padding">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="12" class="ion-text-right">
+                <ion-text style="display: block;" color="primary">
+                  إسم العميل : <span *ngIf="order.owner"> {{ order.owner.name }}</span><span *ngIf="!order.owner"> عميل
+                    غير معروف</span>
+                </ion-text>
+              </ion-col>
+              
+              <ion-col size="6" class="ion-text-right">
+                <ion-text style="display: block;" color="primary" *ngIf="order.delivery_type == 'market'">
+                  تاريخ الطلب : <span style="font-size: .8em;"> {{ order.sutiable_time | date: "dd-MM-yyyy , H:mm" }} </span>
+                </ion-text>
+                <ion-text style="display: block;" color="primary" *ngIf="order.delivery_type == 'delivery'">
+                  تاريخ الطلب :  <span style="font-size: .8em;"> {{ order.sutiable_time | date: "dd-MM-yyyy , H:mm" }} </span>
+                </ion-text>
+              </ion-col>
+
+              <ion-col size="6" class="ion-text-left" *ngIf="!order.fast">
+                <ion-text style="display: block;" color="primary">
+                  <span *ngIf="order.orderproducts[0] && order.orderproducts[0].status == 'accepted'" style="color: #69bb7b;"> {{ OrderStatus.accepted}} </span>
+                  <span *ngIf="order.orderproducts[0] && order.orderproducts[0].status == 'canceld'" style="color: red;"> {{ OrderStatus.canceld}} </span>
+                  <span *ngIf="order.orderproducts[0] && order.orderproducts[0].status == 'user_canceld'" style="color: red;"> {{ OrderStatus.user_canceld}} </span>
+                  <span *ngIf="order.orderproducts[0] && order.orderproducts[0].status == 'pending'" style="color: brown;"> {{ OrderStatus.pending}} </span>
+                  <span *ngIf="order.orderproducts[0] && order.orderproducts[0].status == 'shipping'" style="color: #7D2468;"> {{ OrderStatus.shipping}} </span>
+                </ion-text>
+              </ion-col>
+              <ion-col size="6" class="ion-text-left" *ngIf="order.fast">
+                <ion-text style="display: block;" color="primary">
+                  <span *ngIf="order.fast && order.fast.status == 'accepted'" style="color: #69bb7b;"> {{ OrderStatus.accepted}} </span>
+                  <span *ngIf="order.fast && order.fast.status == 'canceld'" style="color: red;"> {{ OrderStatus.canceld}} </span>
+                  <span *ngIf="order.fast && order.fast.status == 'user_canceld'" style="color: red;"> {{ OrderStatus.user_canceld}} </span>
+                  <span *ngIf="order.fast && order.fast.status == 'pending'" style="color: brown;"> {{ OrderStatus.pending}} </span>
+                  <span *ngIf="order.fast && order.fast.status == 'shipping'" style="color: #7D2468;"> {{ OrderStatus.shipping}} </span>
+                </ion-text>
+              </ion-col>
+
+              <ion-col size="6" class="ion-text-right">
+                <ion-text style="display: block;" color="primary">
+                  رقم الطلب : <span> {{ order.id  }} </span>
+                </ion-text>
+              </ion-col>
+
+              <ion-col size="6" class="ion-text-left" *ngIf="!order.fast">
+                <ion-text style="display: block;" color="primary">
+                  قيمة المبلغ : <span> {{ order.sumOrder}} EGP</span>
+                </ion-text>
+              </ion-col>
+              <ion-col size="6" class="ion-text-left" *ngIf="order.fast">
+                <ion-text style="display: block;" color="primary">
+                  قيمة المبلغ : 
+                  <span *ngIf="order.total_price>0"> {{ order.total_price}} EGP</span>
+                  <span *ngIf="order.total_price==0"> لم يتحدد</span>
+                </ion-text>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
+  </ng-container>
+  <br><br><br>
+</ion-content>

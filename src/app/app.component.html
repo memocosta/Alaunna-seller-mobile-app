@@ -1,0 +1,304 @@
+<ion-app>
+
+  <ion-menu side="start" menuId="first" content-id="main">
+    <ion-header>
+      <ion-toolbar class="nopadding" style="border-bottom: 2px solid #7d2468;">
+        <!-- <img class="background" src="assets/img/header.png" alt=""> -->
+        <div class="background" style="background: #fff;
+        height: 143px;"></div>
+
+        <ng-container class="userData" *ngIf="UserData">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="3">
+                <img class="UserImage" *ngIf="!UserData.Image" src="./assets/img/userPlaceholder.png">
+                <img class="UserImage" *ngIf="UserData.Image"
+                  [src]="ImageBase + '/' + UserData.Image.for + '/' + UserData.Image.name">
+              </ion-col>
+              <ion-col size="9">
+                <ion-row>
+                  <ion-text color="primary" style="display: block;"> {{ UserData.name }} </ion-text>
+                </ion-row>
+                <ion-row>
+                  <ion-text color="primary"> {{ UserData.City?.name }} </ion-text>
+                </ion-row>
+                <ion-row>
+                  <ion-text color="primary" style="word-break: break-all;cursor: pointer;" (click)="goTo()">
+                    https://alaunna.com/markets/details/{{ MarketData.id }} </ion-text>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ng-container>
+
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-menu-toggle>
+          <!-- <ion-item lines="none" routerLink="/home">
+            <ion-icon color="primary" name="time"></ion-icon>
+            <ion-label>
+              ادارة الاشتراك :
+              <br>
+              <span style="color: rgb(109, 221, 160);">المده المتبقيه 20 يوم</span>
+            </ion-label>
+          </ion-item> -->
+          <ion-item lines="none" routerLink="/home">
+            <ion-icon color="primary" name="home"></ion-icon>
+            <ion-label>
+              الرئيسية
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none" routerLink="/myorders">
+            <ion-icon color="primary" name="cart"></ion-icon>
+            <ion-label>
+              الطلبات
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none" routerLink="/myproducts">
+            <ion-icon color="primary" name="apps"></ion-icon>
+            <ion-label>
+              منتجاتي
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none" routerLink="/addproduct">
+            <ion-icon color="primary" name="add"></ion-icon>
+            <ion-label>
+              اضافه منتج
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none" routerLink="/my-offers-two">
+            <ion-icon color="primary" name="planet"></ion-icon>
+            <ion-label>
+              العروض
+            </ion-label>
+          </ion-item>
+          <ion-item routerLink="/my-coupons">
+            <ion-icon color="primary" name="pricetag"></ion-icon>
+            <ion-label>
+              كوبونات
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none" routerLink="/contact-list">
+            <ion-icon color="primary" name="person"></ion-icon>
+            <ion-label>
+              العملاء
+            </ion-label>
+          </ion-item>
+          <!-- <ion-item lines="none">
+            <ion-icon color="primary" name="mail"></ion-icon>
+            <ion-label>
+              الحملات التسوقيه
+            </ion-label>
+          </ion-item> -->
+          <!-- <ion-item lines="none">
+            <ion-icon color="primary" name="repeat"></ion-icon>
+            <ion-label>
+              الربط مع التطبيقات
+            </ion-label>
+          </ion-item> -->
+          <ion-item routerLink="/statistics">
+            <ion-icon color="primary" name="pulse"></ion-icon>
+            <ion-label>
+              احصائيات
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none" routerLink="/settings">
+            <ion-icon color="primary" name="options"></ion-icon>
+            <ion-label>
+              الاعدادات
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none" href="https://api.whatsapp.com/send?phone=201010039331">
+            <ion-icon color="primary" name="send"></ion-icon>
+            <ion-label>
+              تواصل معنا
+            </ion-label>
+          </ion-item>
+          <!-- <ion-item lines="none">
+            <ion-icon color="primary" name="help"></ion-icon>
+            <ion-label>
+              الدليل والمساعده
+            </ion-label>
+          </ion-item> -->
+          <!-- <ion-item lines="none">
+            <ion-icon color="primary" name="alert"></ion-icon>
+            <ion-label>
+              عن التطبيق
+            </ion-label>
+          </ion-item> -->
+          <ion-item lines="none" routerLink="/login">
+            <ion-icon color="primary" name="log-out"></ion-icon>
+            <ion-label>
+              تسجيل الخروج
+            </ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+      <section class="footer">
+        <ion-label>
+          جميع الحقوق محفوظه لـ ألاأونا
+        </ion-label>
+      </section>
+    </ion-content>
+  </ion-menu>
+
+
+  <ion-router-outlet id="main"></ion-router-outlet>
+  <div class="bottom-bar"
+    *ngIf="router.url != '/login' && router.url != '/register' && router.url != '/add-store' && router.url != '/alauuna-products' && router.url.split('?')[0] != '/chat-room'">
+
+    <a routerLink="/home" routerLinkActive="active" color="medium">
+      <ion-icon name="home"></ion-icon>
+      <ion-label>الرئيسية</ion-label>
+    </a>
+    <a routerLink="/myorders" routerLinkActive="active" color="medium"
+      [ngClass]="{'btn-add' : router.url == '/myorders'}">
+      <ion-icon name="list-box"></ion-icon>
+      <ion-badge *ngIf="countNotiOrders > 0" class="tabbadge">{{countNotiOrders}}</ion-badge>
+      <ion-label *ngIf="router.url != '/myorders'">طلباتي</ion-label>
+    </a>
+    <a routerLink="/addproduct" routerLinkActive="active"
+      [ngClass]="{'btn-add' : router.url == '/home' || router.url == '/addproduct'  }">
+      <ion-icon name="add"></ion-icon>
+      <ion-label *ngIf="router.url != '/home' && router.url != '/addproduct'">اضافه</ion-label>
+    </a>
+    <a routerLink="/chatboxes" routerLinkActive="active" color="medium"
+      [ngClass]="{'btn-add' : router.url == '/chatboxes'}">
+      <ion-icon name="chatboxes"></ion-icon>
+      <ion-badge *ngIf="countNotiMessages > 0" class="tabbadge">{{countNotiMessages}}</ion-badge>
+      <ion-label *ngIf="router.url != '/chatboxes'">الرسائل</ion-label>
+    </a>
+    <a routerLink="/opportunity" routerLinkActive="active" color="medium"
+      [ngClass]="{'btn-add' : router.url == '/opportunity'}">
+      <ion-icon name="filing"></ion-icon>
+      <ion-badge *ngIf="countNotiOffers > 0" class="tabbadge">{{countNotiOffers}}</ion-badge>
+      <ion-label *ngIf="router.url != '/opportunity'">فرصة بيع</ion-label>
+    </a>
+  </div>
+  <!-- 
+  <div class="bottom-bar"
+    *ngIf="router.url != '/login' && router.url != '/register' && router.url != '/add-store' && router.url != '/alauuna-products' && router.url.split('?')[0] != '/chat-room'">
+
+    <a routerLink="/home" routerLinkActive="active" color="medium">
+      <ion-icon name="home"></ion-icon>
+      <ion-label>الرئيسية</ion-label>
+    </a>
+    <a routerLink="/myorders" routerLinkActive="active" color="medium"
+      [ngClass]="{'btn-add' : router.url == '/myorders'}">
+      <ion-icon name="list-box"></ion-icon>
+      <ion-badge *ngIf="countNotiOrders > 0" class="tabbadge">{{countNotiOrders}}</ion-badge>
+      <ion-label *ngIf="router.url != '/myorders'">طلباتي</ion-label>
+    </a>
+    <a routerLink="/addproduct" routerLinkActive="active"
+      [ngClass]="{'btn-add' : router.url == '/home' || router.url == '/addproduct'  }">
+      <ion-icon name="add"></ion-icon>
+      <ion-label *ngIf="router.url != '/home' && router.url != '/addproduct'">اضافه</ion-label>
+    </a>
+    <a routerLink="/chatboxes" routerLinkActive="active" color="medium"
+      [ngClass]="{'btn-add' : router.url == '/chatboxes'}">
+      <ion-icon name="chatboxes"></ion-icon>
+      <ion-badge *ngIf="countNotiMessages > 0" class="tabbadge">{{countNotiMessages}}</ion-badge>
+      <ion-label *ngIf="router.url != '/chatboxes'">الرسائل</ion-label>
+    </a>
+    <a routerLink="/opportunity" routerLinkActive="active" color="medium"
+      [ngClass]="{'btn-add' : router.url == '/opportunity'}">
+      <ion-icon name="filing"></ion-icon>
+      <ion-badge *ngIf="countNotiOffers > 0" class="tabbadge">{{countNotiOffers}}</ion-badge>
+      <ion-label *ngIf="router.url != '/opportunity'">فرصة بيع</ion-label>
+    </a>
+  </div>
+</ion-app> -->
+  <!-- <ion-app>
+
+  <ion-menu side="start" menuId="first" content-id="main">
+    <ion-header>
+      <ion-toolbar color="primary" class="nopadding">
+        <img class="background" src="assets/img/header.png" alt="">
+        <ng-container class="userData" *ngIf="UserData">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="3">
+                <img class="UserImage" *ngIf="!UserData.Image" src="./assets/img/userPlaceholder.png">
+                <img class="UserImage" *ngIf="UserData.Image"
+                  [src]="ImageBase + '/' + UserData.Image.for + '/' + UserData.Image.name">
+              </ion-col>
+              <ion-col size="9">
+                <ion-row>
+                  <ion-text color="light" style="display: block;"> {{ UserData.name }} </ion-text>
+                </ion-row>
+                <ion-row>
+                  <ion-text color="light"> {{ UserData.City?.name }} </ion-text>
+                </ion-row>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ng-container>
+
+      </ion-toolbar>
+    </ion-header>
+    <ion-content>
+      <ion-list>
+        <ion-menu-toggle *ngFor="let page of pages" auto-hide="false">
+          <ion-item *ngIf="page.icon == 'send'" [href]="[page.url]">
+            <ion-icon color="primary" [name]="page.icon"></ion-icon>
+            <ion-label>
+              {{ page.title }}
+            </ion-label>
+          </ion-item>
+
+          <ion-item *ngIf="page.type != 'custom-function' && page.icon != 'send'" [routerDirection]="'root'" [routerLink]="[page.url]">
+            <ion-icon color="primary" [name]="page.icon"></ion-icon>
+            <ion-label>
+              {{ page.title }}
+            </ion-label>
+          </ion-item>
+
+          <ion-item *ngIf="page.type == 'custom-function' && page.icon != 'send'" (click)="page['function'].call(this)">
+            <ion-icon color="primary" [name]="page.icon"></ion-icon>
+            <ion-label>
+              {{ page.title }}
+            </ion-label>
+          </ion-item>
+
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+
+  <ion-router-outlet id="main"></ion-router-outlet>
+
+  <div class="bottom-bar"
+    *ngIf="router.url != '/login' && router.url != '/register' && router.url != '/add-store' && router.url != '/alauuna-products' && router.url.split('?')[0] != '/chat-room'">
+
+    <a routerLink="/home" routerLinkActive="active" color="medium">
+      <ion-icon name="home"></ion-icon>
+      <ion-label>الرئيسية</ion-label>
+    </a>
+    <a routerLink="/myorders" routerLinkActive="active" color="medium"
+      [ngClass]="{'btn-add' : router.url == '/myorders'}">
+      <ion-icon name="list-box"></ion-icon>
+      <ion-badge *ngIf="countNotiOrders > 0" class="tabbadge">{{countNotiOrders}}</ion-badge>
+      <ion-label *ngIf="router.url != '/myorders'">طلباتي</ion-label>
+    </a>
+    <a routerLink="/addproduct" routerLinkActive="active"
+      [ngClass]="{'btn-add' : router.url == '/home' || router.url == '/addproduct'  }">
+      <ion-icon name="add"></ion-icon>
+      <ion-label *ngIf="router.url != '/home' && router.url != '/addproduct'">اضافه</ion-label>
+    </a>
+    <a routerLink="/chatboxes" routerLinkActive="active" color="medium"
+      [ngClass]="{'btn-add' : router.url == '/chatboxes'}">
+      <ion-icon name="chatboxes"></ion-icon>
+      <ion-badge *ngIf="countNotiMessages > 0" class="tabbadge">{{countNotiMessages}}</ion-badge>
+      <ion-label *ngIf="router.url != '/chatboxes'">الرسائل</ion-label>
+    </a>
+    <a routerLink="/opportunity" routerLinkActive="active" color="medium"
+      [ngClass]="{'btn-add' : router.url == '/opportunity'}">
+      <ion-icon name="filing"></ion-icon>
+      <ion-badge *ngIf="countNotiOffers > 0" class="tabbadge">{{countNotiOffers}}</ion-badge>
+      <ion-label *ngIf="router.url != '/opportunity'">فرصة بيع</ion-label>
+    </a>  
+  </div>
+</ion-app> -->

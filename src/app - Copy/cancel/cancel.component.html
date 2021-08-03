@@ -1,0 +1,30 @@
+<ion-content color="light">
+  <div class="login-logo">
+    <img src="assets/img/Group 2823.png" alt="">
+  </div>
+  <br><br>
+  <ion-text color="primary">
+    <h6 class="text-center"> 
+      إلغاء الطلب
+    </h6>
+  </ion-text>
+  <br><br>
+  <div class="form-container">
+    <div class="form">
+      <ion-list lines="none">
+        <ion-item>
+          <ion-label position="stacked">سبب الألغاء</ion-label>
+          <ion-textarea rows="6" cols="20" placeholder="" [(ngModel)]="canceld_reason"></ion-textarea>
+        </ion-item>
+        <ion-button expand="block" class="sign-btn" (click)="onSubmitedPressed()">
+          <ion-icon color="light" name="arrow-dropleft-circle"></ion-icon>
+          <ion-label color="light" class="ion-padding">تأكيد</ion-label>
+        </ion-button>
+
+        <h6 class="text-center"><a (click)="dismissModal()"> العودة لتفاصيل الطلب </a></h6>
+      </ion-list>
+    </div>
+
+  </div>
+
+</ion-content>

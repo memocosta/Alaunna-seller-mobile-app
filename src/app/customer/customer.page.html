@@ -1,0 +1,177 @@
+<ion-button routerLink="/contact-list">
+  <ion-icon name="arrow-back"></ion-icon>
+  <ion-text class="text">بيانات العميل</ion-text>
+</ion-button>
+<ion-content>
+  <ng-container>
+    <ng-container>
+      <!-- <ng-container>
+        <ng-container>
+          <ion-card color="light">
+            <ion-card-content class="ion-no-padding">
+              <ion-grid>
+                <ion-row>
+                  <ion-col size="12" class="ion-text-right">
+                    <ion-text style="display: block">
+                      يمكنك تلقي الطلبات هنا !
+                    </ion-text>
+                  </ion-col>
+                  <ion-col size="12" class="ion-text-right">
+                    <ion-text style="display: block;margin-bottom: 18px;">
+                      كما يمكنك إنشاء طلبات لعملائك على الااونا أو عميل جديد
+                    </ion-text>
+                  </ion-col>
+                  <ion-col size="12" class="ion-text-right">
+                    <ion-button class="button" (click)="onCreatePressed()" color="success">
+                      <ion-icon name="add"></ion-icon>
+                      إنشاء طلب لعمیل
+                    </ion-button>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card-content>
+          </ion-card>
+        </ng-container>
+      </ng-container> -->
+      <ion-card color="light">
+        <ion-card-content class="ion-no-padding">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="12" class="ion-text-right">
+                <ion-text style="display: block;
+    font-weight: bold;
+    color: #000;
+    font-size: large;">
+                  العميل : <ion-text><span style="margin-right: 15px;">{{owner['name']}}</span>
+                  </ion-text>
+                </ion-text>
+              </ion-col>
+              <ion-col size="12" class="ion-text-right">
+                <ion-text style="display: block;
+    font-weight: bold;
+    color: #000;
+    font-size: large;">
+                  رقم الهاتف : <ion-text><span style="margin-right: 15px;">{{owner['phone']}}</span>
+                  </ion-text>
+                </ion-text>
+              </ion-col>
+              <ion-col *ngIf="myOrders.length > 0 && myOrders[0].owner.Country" size="12" class="ion-text-right">
+                <ion-text style="display: block;
+    font-weight: bold;
+    color: #000;
+    font-size: large;">
+                  العنوان : <ion-text><span style="margin-right: 15px;">{{myOrders[0].owner.Country.name}}</span>
+                    <span *ngIf="myOrders[0].owner.City"> - {{myOrders[0].owner.City.name}}</span>
+                  </ion-text>
+                </ion-text>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </ng-container>
+    <ng-container class="myorders-page">
+      <ion-card color="light">
+        <ion-card-content class="ion-no-padding myorders-content">
+          <ion-grid>
+            <ion-row>
+              <ion-col class="order">
+                <div>الطلبات</div>
+              </ion-col>
+              <!-- <ion-col>
+                <div>
+                  <ion-list style="width: max-content;
+                  border-radius: 17px;
+                  height: 41px;
+                  margin-right: auto;
+                  display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  margin: auto">
+                    <ion-item style="text-align: end;
+                    font-size: 20px;
+                    font-weight: 600">
+                      <ion-label>
+                        <ion-icon name="funnel"></ion-icon> فلتر
+                      </ion-label>
+                      <ion-select (ionChange)="filterData($event)" interface="popover">
+                        <ion-select-option value="allOrders">الكل</ion-select-option>
+
+                        <ion-select-option value="pending">في الانتظار</ion-select-option>
+                        <ion-select-option value="pending">جديد</ion-select-option>
+
+                        <ion-select-option value="accepted">جاهز</ion-select-option>
+                        <ion-select-option value="shipping">جاري التوصيل </ion-select-option>
+                        <ion-select-option value="allOrders">مكتمل </ion-select-option>
+                        <ion-select-option value="canceld">ملغي</ion-select-option>
+                        <ion-select-option value="user_canceld">مسترجع</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                  </ion-list>
+                </div>
+              </ion-col> -->
+            </ion-row>
+            <ng-container *ngFor="let order of myOrders">
+              <ng-container *ngIf="order.owner">
+                <ion-card color="light">
+                  <ion-card-content class="ion-no-padding">
+
+                    <ion-grid>
+
+                      <ion-row>
+                        <!-- <ion-col size="12" class="ion-text-right">
+                          <ion-text style="display: block;" color="primary">
+                            إسم العميل : <span *ngIf="order.owner"> {{ order.owner.name }}</span><span
+                              *ngIf="!order.owner"> عميل
+                              غير معروف</span>
+                          </ion-text>
+                        </ion-col> -->
+                        <ion-col size="4" class="ion-text-right">
+                          <ion-text style="display: flex;" color="primary">
+                            طلب رقم <span style="color:#7d2468;padding-right: 10px;"> {{ order.id }} </span>
+                          </ion-text>
+                        </ion-col>
+                        <ion-col size="4" class="ion-text-left">
+                          <ion-text style="display: block;direction: ltr;" color="primary">
+                            <span *ngIf="order.total_price > 0" style="color: #000;">{{ order.total_price}} EGP </span>
+                            <span *ngIf="order.total_price==0"> لم يتحدد</span>
+                          </ion-text>
+                        </ion-col>
+                        <ion-col size="4" class="ion-text-left ess">
+                          <ion-text style="display: block;" color="primary">
+
+                            <span *ngIf="order.status == 'accepted'" style="color: #69bb7b;"> {{ OrderStatus.accepted}}
+                            </span>
+                            <span *ngIf="order.status == 'canceld'" style="color: red;"> {{ OrderStatus.canceld}}
+                            </span>
+                            <span *ngIf=" order.status == 'user_canceld'" style="color: red;">
+                              {{ OrderStatus.user_canceld}} </span>
+                            <span *ngIf="order.status == 'pending'" style="color: #7d2468;"> {{ OrderStatus.pending}}
+                            </span>
+                            <span *ngIf="order.status == 'shipping'" style="color: #7D2468;"> {{ OrderStatus.shipping}}
+                            </span>
+                          </ion-text>
+                        </ion-col>
+                        <ion-col size="6" class="ion-text-right">
+                          <ion-text style="display: block;" color="primary" *ngIf="order.delivery_type == 'delivery'">
+                            <span style="font-size: .8em;direction: ltr;
+                            display: inline-block;">
+                              {{ order.sutiable_time | date:" dd-MM-yyyy hh:mm a " }} </span>
+                          </ion-text>
+                          <ion-text style="display: block;" color="primary" *ngIf="order.delivery_type == 'market'">
+                            <span style="font-size: .8em;direction: ltr;
+                            display: inline-block;">
+                              {{ order.sutiable_time | date:" dd-MM-yyyy hh:mm a " }} </span>
+                          </ion-text>
+
+                        </ion-col>
+                      </ion-row>
+                    </ion-grid>
+                  </ion-card-content>
+                </ion-card>
+              </ng-container>
+            </ng-container>
+          </ion-grid>
+        </ion-card-content>
+      </ion-card>
+    </ng-container>

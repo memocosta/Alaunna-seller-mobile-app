@@ -1,0 +1,31 @@
+.cat-page {
+    ion-list {
+        background-color: transparent;
+        --border-color: #B4B6B7;
+        border-bottom-color: #B4B6B7;
+    }
+
+    .select {
+        width: 100% !important
+    }
+
+    ion-select {
+        border-radius: 10px;
+        padding: 10px;
+        max-width: 100%;
+        color: var(--ion-color-primary)
+    }
+
+    
+
+    ion-item {
+        // --border-width: 10px 0px 20px 5px;
+        --highlight-height: 0 !important;
+    }
+
+    .item-div {
+        width: 95%;
+        height: 1px;
+        color: var(--ion-color-light);
+    }
+}

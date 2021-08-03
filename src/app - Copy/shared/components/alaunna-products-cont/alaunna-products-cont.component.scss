@@ -1,0 +1,20 @@
+.InputItem{
+    width: 85%;
+    border-bottom: 2px solid var(--ion-primary) !important;
+}
+.text-input,.datetime-text,.select-text {
+    font-weight: bold;
+}
+ion-slides {
+    height: auto;
+
+  }
+  ion-list , ion-item{
+      width: 100% !important;
+      background-color: transparent !important;
+      --background: transparent;
+  }
+  .add-btn{
+    margin-top: 30px;
+    margin: 20px 10px;
+}

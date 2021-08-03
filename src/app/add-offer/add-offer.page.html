@@ -1,0 +1,112 @@
+<ion-header>
+  <ion-toolbar color="grey">
+    <ion-title color="primary">أضف عرض جديد</ion-title>
+    <ion-row>
+      <ion-col size="1">
+        <div class="header-icon">
+          <ion-menu-button name="menu" color="primary"></ion-menu-button>
+        </div>
+      </ion-col>
+      <ion-col size="10">
+        <ion-searchbar></ion-searchbar>
+      </ion-col>
+      <ion-col size="1">
+        <div class="header-icon" routerLink="/notifications">
+          <ion-icon name="notifications" color="primary"></ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+<ion-content padding>
+  <ion-row>
+    <ion-col size="4">
+      <div class="new-ahmed">
+        <ion-select placeholder="%" [(ngModel)]="OfferData.percentage">
+          <ion-select-option value="1">%</ion-select-option>
+          <ion-select-option value="0">عرض خاص</ion-select-option>
+          <ion-select-option value="2">شحن مجاني</ion-select-option>
+        </ion-select>
+      </div>
+    </ion-col>
+    <ion-col size="8">
+      <div class="new-ahmed">
+        <ion-select placeholder="قيمة العرض" *ngIf="OfferData.percentage==1" [(ngModel)]="OfferData.value">
+          <ion-select-option value="5">خصم 5 %</ion-select-option>
+          <ion-select-option value="7.5">خصم 7.5 %</ion-select-option>
+          <ion-select-option value="10">خصم 10 %</ion-select-option>
+          <ion-select-option value="12.5">خصم 12.5 %</ion-select-option>
+          <ion-select-option value="15">خصم 15 %</ion-select-option>
+          <ion-select-option value="17.5">خصم 17.5 %</ion-select-option>
+          <ion-select-option value="20">خصم 20 %</ion-select-option>
+          <ion-select-option value="22.5">خصم 22.5 %</ion-select-option>
+          <ion-select-option value="25">خصم 25 %</ion-select-option>
+          <ion-select-option value="30">خصم 30 %</ion-select-option>
+          <ion-select-option value="35">خصم 35 %</ion-select-option>
+          <ion-select-option value="40">خصم 40 %</ion-select-option>
+          <ion-select-option value="45">خصم 45 %</ion-select-option>
+          <ion-select-option value="50">خصم 50 %</ion-select-option>
+          <ion-select-option value="55">خصم 55 %</ion-select-option>
+          <ion-select-option value="60">خصم 60 %</ion-select-option>
+          <ion-select-option value="65">خصم 65 %</ion-select-option>
+          <ion-select-option value="70">خصم 70 %</ion-select-option>
+        </ion-select>
+        <ion-input type="text" placeholder="العرض لايزيد عن 7 كلمات..." *ngIf="OfferData.percentage==0"
+          [(ngModel)]="OfferData.title" [attr.maxlength]="30"></ion-input>
+      </div>
+      <p class="validation-text" *ngIf="valid&&!OfferData.value&&OfferData.percentage==1">قيمة العرض مطلوبة*</p>
+      <p class="validation-text" *ngIf="valid&&!OfferData.title&&OfferData.percentage==0">وصف العرض مطلوب*</p>
+    </ion-col>
+
+  </ion-row>
+  <div class="new-div2">
+    <p>يطبق العرض علي:</p>
+    <div class="item item-trns">
+      <ion-checkbox [checked]="all" (ionChange)="onSelectAllChange($event)"></ion-checkbox>
+      <ion-label stacked>كل المنتجات</ion-label>
+    </div>
+    <div class="item item-trns">
+      <ion-checkbox [checked]="specific" (ionChange)="onSelectSpecificChange($event)"></ion-checkbox>
+      <ion-label>منتجات محددة</ion-label>
+    </div>
+  </div>
+  <div class="new-div3">
+    <div>
+      <ion-label>تاريخ بداية العرض</ion-label>
+      <ion-datetime displayFormat="DD MMM YYYY" [min]="start" [(ngModel)]="OfferData.from"></ion-datetime>
+      <ion-icon name="md-calendar"></ion-icon>
+    </div>
+    <p class="validation-text text-center" *ngIf="valid&&!OfferData.from">التاريخ مطلوب*</p>
+    <div>
+      <ion-label>تاريخ نهاية العرض</ion-label>
+      <ion-datetime displayFormat="DD MMM YYYY" [min]="start" [(ngModel)]="OfferData.to"></ion-datetime>
+      <ion-icon name="md-calendar"></ion-icon>
+    </div>
+    <p class="validation-text  text-center" *ngIf="valid&&!OfferData.to">التاريخ مطلوب*</p>
+  </div>
+  <ion-item class="text-item">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="9">
+          <ion-textarea rows="6" cols="20" placeholder="يتم كتابةالوصف هنا (أختياري)..."
+            [(ngModel)]="OfferData.description" [attr.maxlength]="30"></ion-textarea>
+        </ion-col>
+        <ion-col size="3" (click)="onImageNeeded()">
+          <ion-icon name="camera" color="primary" (click)="onImageNeeded()"></ion-icon>
+        </ion-col>
+
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+  <!-- <input type="file" name="file" id="file" class="fileInput" />
+  <label class="addImg" for="file">
+    <ion-icon name="photos"></ion-icon>
+  </label> -->
+  <ion-button expand="block" class="add-btn" (click)="onCreatePressed()">
+    <ion-icon color="light" name="arrow-dropleft-circle"></ion-icon>
+    <ion-label color="light" padding>
+      إضافة
+    </ion-label>
+  </ion-button>
+  <br><br><br><br><br>
+</ion-content>

@@ -1,0 +1,53 @@
+ion-select{
+    background-color: #fff;
+    border-radius: 10px;
+    padding:10px;
+    color: var(--ion-color-primary)
+}
+.chatboxes ion-card img{
+    width: 100%;
+    border-radius: 50%;
+}
+
+.chatboxes  ion-card-title{
+    margin-bottom: 10px;
+    font-size: 12px;
+    float: left;
+}
+.chatboxes ion-card p{ 
+    color: var(--ion-color-medium);
+    margin-top: 10px
+}
+.chatboxes ion-card .popover-btn{ 
+    font-size: 20px
+}
+.chatboxes .card-content-md{
+    padding-top: 0;
+}
+.item{
+    padding: 0 16px;
+}
+.chatboxes ion-item-option{
+    border-radius: 10px;
+    margin: 0 2px;
+    width: 50px;
+    ion-label{
+        font-size: 12px;
+        display: block;
+    }
+    ion-icon{
+        font-size: 24px
+    }
+    
+}
+
+.message-list{
+    margin-bottom: 50px;
+}
+.boldText{font-weight: 800;}
+.read-sign{
+    font-size: 2.6em;
+    display: inline-block;
+    height: 5px !important;
+}
+.read-sign.active{color: red;}

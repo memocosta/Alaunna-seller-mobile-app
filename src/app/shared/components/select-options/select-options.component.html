@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar color="grey">
+    <ion-buttons slot="start">
+      <ion-button color="success" (click)="onDonePreseed()">
+        <div class="all-icon">
+          <div class="icon-div">
+            <ion-icon slot="icon-only" name="checkmark"></ion-icon>
+          </div>
+          <label>تم</label>
+        </div>
+      </ion-button>
+    </ion-buttons>
+    <ion-title color="primary">تخصيص المنتج</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()" color="danger">
+        <div class="all-icon">
+          <div class="icon-div">
+            <ion-icon slot="icon-only" name="close"></ion-icon>
+          </div>
+          <label>الغاء</label>
+        </div>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="selecet-options-page" color="none">
+  <!-- <div class="form-container"> -->
+  <ion-list color="none" lines="none">
+
+    <ion-item color="none" class="OneItem" *ngFor="let extra of ProductExtrainput;let i = index">
+      <ion-label> {{extra.name}} </ion-label>
+      <!-- <ion-select okText="تم" cancelText="الغاء" [(ngModel)]="extra.value" multiple="true">
+
+          <ion-select-option *ngFor="let option of extra.values" [value]="option"> {{option}}</ion-select-option>
+        </ion-select> -->
+      <ionic-selectable item-content [(ngModel)]="extra.SearchableValue" itemValueField="name" itemTextField="name"
+        [items]="extra.SearchableValues" [isMultiple]="true" [canSearch]="true"
+        (onChange)="onExtraChange($event , extra)" [searchPlaceholder]="'البحث'" [closeButtonText]="'الغاء'"
+        [clearButtonText]="'مسح'" [confirmButtonText]="'تم'" [searchFailText]="'لا يوجد اي مطابقه'">
+      </ionic-selectable>
+
+    </ion-item>
+
+    <!-- <ion-button expand="block" class="sign-btn" (click)="onDonePreseed()">
+      <ion-icon color="light" name="arrow-dropleft-circle"></ion-icon>
+      <ion-label color="light" class="ion-padding"> حفظ </ion-label>
+    </ion-button> -->
+  </ion-list>
+  <!-- </div> -->
+
+</ion-content>

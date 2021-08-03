@@ -1,0 +1,116 @@
+<ion-header>
+  <ion-row>
+    <ion-col size="1">
+      <div class="header-icon" style="width: max-content;
+        margin-left: 102px">
+        <ion-menu-button style="margin-right: 75px;" name="menu"></ion-menu-button>
+        <span>
+          خيارات الشحن
+        </span>
+      </div>
+    </ion-col>
+    <ion-col size="9">
+      <!-- <ion-searchbar placeholder="البحث"></ion-searchbar> -->
+    </ion-col>
+    <ion-col size="2">
+      <ion-icon routerLink="/settings" name="arrow-back"></ion-icon>
+    </ion-col>
+  </ion-row>
+</ion-header>
+<ion-content>
+  <div class="add" *ngIf="showShipping">
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6">
+          <ion-text class="text-d">
+            يمكن اضافه خدمه الشحن الخاصه بك
+          </ion-text>
+        </ion-col>
+        <ion-col size="4" class="ion-text-right">
+          <ion-button class="button" routerLink="/add-shipping" color="success">
+            <ion-icon name="add"></ion-icon>
+            اضافه
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <ion-grid *ngIf="showShipping">
+    <ion-row>
+      <ion-col size="10">
+        <ion-text class="text-d">
+          خيارات توصيل يقدمه الموقع لعملائه
+        </ion-text>
+      </ion-col>
+      <ion-col size="2" class="ion-text-left">
+        <ion-toggle (click)="presentAlert(0)" checked *ngIf="MarketData.alaunna_shipping"></ion-toggle>
+        <ion-toggle (click)="presentAlert(1)" *ngIf="!MarketData.alaunna_shipping"></ion-toggle>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-card style="width: 100%;margin-bottom: 75px;">
+        <ion-item lines="none" *ngFor="let shipping of shippings_companies">
+          <ion-label color="primary">
+            {{shipping.name}}
+          </ion-label>
+          <ion-img style="width: 80px; height: 80px;"
+            [src]="ImageBase + '/'  + shipping['Logo'].for +'/'+ shipping['Logo'].name"></ion-img>
+        </ion-item>
+      </ion-card>
+    </ion-row>
+  </ion-grid>
+  <ion-grid *ngIf="!showShipping">
+    <ion-row>
+      <ion-col size="10">
+        <ion-text class="text-d">
+          خدمة الشحن الخاصه بك
+        </ion-text>
+      </ion-col>
+      <!-- <ion-col size="2" class="ion-text-left">
+        <ion-toggle (click)="presentAlert(0)" checked *ngIf="MarketData.alaunna_shipping"></ion-toggle>
+        <ion-toggle (click)="presentAlert(1)"  *ngIf="!MarketData.alaunna_shipping"></ion-toggle>
+      </ion-col> -->
+    </ion-row>
+    <ion-row>
+      <ion-card style="width: 100%;">
+        <ion-item *ngFor="let shipping of shippings">
+          <ion-label color="primary" style="cursor: pointer;" (click)="edit_shipping(shipping)"
+            [routerLink]="['/edit-shipping/'+shipping.id]">
+            {{shipping.name}}
+          </ion-label>
+          <ion-img style="width: 80px; height: 80px;" src="assets/img/truck-solid.svg"></ion-img>
+        </ion-item>
+      </ion-card>
+    </ion-row>
+  </ion-grid>
+  <ion-grid *ngIf="!showShipping">
+    <ion-row>
+      <ion-col size="10">
+        <ion-text class="text-d">
+          خيارات توصيل يقدمه الموقع لعملائه
+        </ion-text>
+      </ion-col>
+      <ion-col size="2" class="ion-text-left">
+        <ion-toggle (click)="presentAlert(0)" checked *ngIf="MarketData.alaunna_shipping"></ion-toggle>
+        <ion-toggle (click)="presentAlert(1)" *ngIf="!MarketData.alaunna_shipping"></ion-toggle>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-card style="width: 100%;">
+        <ion-item lines="none" *ngFor="let shipping of shippings_companies">
+          <ion-label color="primary">
+            {{shipping.name}}
+          </ion-label>
+          <ion-img style="width: 80px; height: 80px;"
+            [src]="ImageBase + '/'  + shipping['Logo'].for +'/'+ shipping['Logo'].name"></ion-img>
+        </ion-item>
+      </ion-card>
+    </ion-row>
+  </ion-grid>
+  <ion-grid *ngIf="!showShipping">
+    <section>
+      <ion-button style="margin: 0 auto 100px 0 !important;" routerLink="/add-shipping" expand="block">اضافه شحن خاص بك
+      </ion-button>
+    </section>
+  </ion-grid>
+</ion-content>

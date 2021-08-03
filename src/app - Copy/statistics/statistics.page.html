@@ -1,0 +1,43 @@
+
+<ion-header>
+  <ion-toolbar color="grey">
+    <ion-title color="primary">الإحصائيات</ion-title>
+    <ion-row>
+      <ion-col size="1">
+        <div class="header-icon">
+          <!-- <ion-icon name="menu" color="primary"></ion-icon> -->
+          <ion-menu-button name="menu" color="primary"></ion-menu-button>
+        </div>
+      </ion-col>
+      <ion-col size="9">
+        <ion-searchbar placeholder="البحث"></ion-searchbar>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <ion-list lines="none" class="statistics ion-padding">
+    <ion-item class="margin-vertical" [routerLink]="['/myproducts']">
+      <ion-label>عدد المنتجات المعروضة <span slot="end">{{Products_count}}</span></ion-label>
+      <ion-icon name="filing" slot="start"></ion-icon>
+    </ion-item>
+    <ion-item class="margin-vertical">
+      <ion-label>عدد مشاهدات المتجر <span slot="end" *ngIf="MarketData">{{MarketData.views}}</span></ion-label>
+      <ion-icon name="eye" slot="start"></ion-icon>
+    </ion-item>
+    <ion-item class="margin-vertical" [routerLink]="['/chatboxes']">
+      <ion-label>معدل الرد على الرسائل <span slot="end" >{{readPercentage}}%</span></ion-label>
+      <ion-icon name="mail" slot="start"></ion-icon>
+    </ion-item>
+    <ion-item class="margin-vertical" [routerLink]="['/opportunity']">
+      <ion-label>معدل إستغلال فرص البيع <span slot="end">{{offerPercent}}%</span></ion-label>
+      <ion-icon name="ios-filing" slot="start"></ion-icon>
+    </ion-item>
+    <ion-item class="margin-vertical" [routerLink]="[ '/followers']">
+      <ion-label>عدد المتابعين <span slot="end" >{{followersCount}}</span></ion-label>
+      <ion-icon name="person" slot="start"></ion-icon>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

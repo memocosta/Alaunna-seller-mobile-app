@@ -1,0 +1,140 @@
+a.share-icon {
+  position: absolute;
+  bottom: 2px;
+  left: 18px;
+  font-size: x-large;
+}
+a {
+  text-decoration: none;
+}
+.custom-text {
+  text-align: center;
+  font-weight: 600;
+}
+.custom-text p {
+  color: #3487d6;
+}
+.welcome-card {
+  margin: 0;
+  border-radius: 0;
+  padding: 0;
+}
+.welcome-card img {
+  max-height: 60vh;
+  overflow: hidden;
+}
+.store-info{
+  margin: auto;
+  margin-top: -40px;
+  width: 80%;
+}
+.popover-btn{
+  position: absolute;
+  left: 0;
+  top: -7px;
+  --background: transparent;
+  padding: 10px;
+  font-size: 24px
+}
+ion-card-header{
+  padding: 10px;
+  padding-bottom: 0;
+}
+  ion-card-title{
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--ion-color-primary);
+  }
+  ion-card-subtitle{
+    font-size: 12px;
+    font-weight: 400;
+    margin: 10px 0;
+  }
+  ion-card{
+    position: relative;
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 5px 10px
+  }
+  .card-btn{
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  img.item-img{
+    border-radius: 20px;
+    box-shadow: var(--box-shadow);
+    width: 100%
+  }
+//  .content-page ion-card,.content-page img.item-img{
+//   //  height: 120px
+//  }
+
+.edit-button {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+}
+
+.no-products{
+  h4, h5 {
+    text-align: center;
+    margin: 5px auto;
+    width: 100%;
+  }
+  h4{
+    font-size: 14px;
+    color: #8e9294;
+  }
+  h5{
+    font-size: 12px;
+    color: #3880ff;
+  }
+}
+ion-slide{
+  ion-card{
+    width: 100%;
+  }
+  width: 90% !important;
+  position: relative;
+  ion-card-title{
+    font-size: .8em;
+  }
+  ion-card-content{
+    font-size: .8em;
+  }
+  ion-icon{
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    color: #000;
+  }
+}
+.img-container{
+  position: relative;
+  span{
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    background: red;
+    color: #fff;
+    font-size: .6em;
+    padding: 10px 5px;
+    border-radius: 0 0 15px;
+  }
+}
+del{
+  color: red;
+  display: inline-block;
+}
+
+.coupon {
+  font-size: xx-small !important;
+}
+
+.coupon span {
+  background: #7d2468;
+  color: white;
+  padding: 2px;
+  margin-left: 5px;
+}

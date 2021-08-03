@@ -1,0 +1,61 @@
+<ion-content>
+  <ion-button routerLink="/edit-store">
+    <ion-icon name="arrow-back"></ion-icon>
+    <ion-text class="text">اضافه عنوان جديد</ion-text>
+  </ion-button>
+  <form #f="ngForm" novalidate (ngSubmit)="onSubmit(f)">
+    <ion-grid>
+      <ion-col>
+        <ion-item>
+          <ion-label position="floating">الأسم</ion-label>
+          <ion-input type="text" required name="name" [(ngModel)]="data.name" #nameCtrl="ngModel"
+            placeholder="الشركه المصريه"></ion-input>
+          <div style="margin-bottom: 15px;" *ngIf="!nameCtrl.valid && nameCtrl.touched">
+            <ion-text color="danger"> برجاء ادخال الاسم</ion-text>
+          </div>
+        </ion-item>
+        <ion-item>
+          <ion-label>المحافظه</ion-label>
+          <ion-select type="text" required name="country_id" [(ngModel)]="data.country_id"
+            (ionChange)="getCities($event)" #country_idCtrl="ngModel" placeholder="المحافظة" interface="popover">
+            <ion-select-option value="{{country.id}}" *ngFor="let country of countries">{{country.name}}
+            </ion-select-option>
+          </ion-select>
+          <div style="margin-bottom: 15px;" *ngIf="!country_idCtrl.valid && country_idCtrl.touched">
+            <ion-text color="danger"> برجاء اختيار المحافظه </ion-text>
+          </div>
+        </ion-item>
+        <ion-item>
+          <ion-label>المدينه</ion-label>
+          <ion-select type="text" required name="city_id" [(ngModel)]="data.city_id" #city_idCtrl="ngModel"
+            placeholder="المدينة" interface="popover">
+            <ion-select-option value="{{city.id}}" *ngFor="let city of cities">{{city.name}}</ion-select-option>
+          </ion-select>
+          <div style="margin-bottom: 15px;" *ngIf="!city_idCtrl.valid && city_idCtrl.touched">
+            <ion-text color="danger"> برجاء اختيار المدينه </ion-text>
+          </div>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">العنوان</ion-label>
+          <ion-input type="text" required name="address" [(ngModel)]="data.address" #addressCtrl="ngModel"
+            placeholder="العنوان"></ion-input>
+          <div style="margin-bottom: 15px;" *ngIf="!addressCtrl.valid && addressCtrl.touched">
+            <ion-text color="danger"> برجاء ادخال العنوان</ion-text>
+          </div>
+        </ion-item>
+        <div #map id="map"></div>
+      </ion-col>
+    </ion-grid>
+    <div style="text-align: center">
+      <ion-button type="submit" [disabled]="!f.valid" size="medium">اضافه</ion-button>
+    </div>
+  </form>
+  <!-- <ion-grid>
+    <ion-col>
+      <section>
+        <ion-button routerLink="/new-address" expand="block">اضافه</ion-button>
+      </section>
+      </ion-col>
+  </ion-grid> -->
+
+</ion-content>

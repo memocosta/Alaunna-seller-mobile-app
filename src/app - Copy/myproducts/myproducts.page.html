@@ -1,0 +1,105 @@
+<ion-header>
+  <ion-toolbar color="grey">
+    <ion-title color="primary">منتجاتي</ion-title>
+    <ion-row>
+      <ion-col size="1">
+        <div class="header-icon">
+          <!-- <ion-icon name="menu" color="primary"></ion-icon> -->
+          <ion-menu-button name="menu" color="primary"></ion-menu-button>
+        </div>
+      </ion-col>
+      <ion-col size="9">
+        <ion-searchbar placeholder="البحث"></ion-searchbar>
+      </ion-col>
+      <ion-col size="2">
+        <div class="header-icon" routerLink="/notifications">
+          <ion-badge *ngIf="countNotification > 0">{{countNotification}}</ion-badge>
+          <ion-icon name="notifications" color="primary"></ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-select placeholder="أختر تصنيف" [(ngModel)]="filterData.subctegory_id" (ionChange)="loadMyroducts()"
+      cancelText="الغاء" okText="تم">
+      <ion-select-option *ngFor="let subcat of subcategories" [value]="subcat.id"> {{ subcat.name }}
+      </ion-select-option>
+    </ion-select>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="myproducts">
+  <ion-list class="item item-trns" lines="none">
+    <ion-item-sliding *ngFor="let product of Products;let i = index" [id]="'product'+i" #Product color="none">
+      <ion-item color="none" [id]="'item' + i">
+        <ion-card color="light" [ngClass]="{'now_active' : product.status != 'active'}">
+          <ion-grid >
+            <ion-row >
+              <ion-col size="4">
+                <img *ngIf="!product.images || !product.images[0]"
+                  src="assets/img/default.png">
+                <img *ngIf="product.images && product.images[0]"
+                  [src]="ImgeBase + '/' + product.images[0].for  + '/big/' + product.images[0].name"
+                  [alt]="product.images[0].alt">
+              </ion-col>
+              <ion-col size="7">
+                <ion-card-content>
+                  <ion-card-title color="primary">
+                    {{ product.name }}
+                  </ion-card-title>
+                  <ion-card-subtitle color="primary" dir="rtl">سعر البيع
+                    <span *ngIf="product.offer" class="ion-padding-horizontal">{{ (product['market'][0]['Market_Products']['Selling_price']-(product['market'][0]['Market_Products']['Selling_price']*product.offer.value/100)) }} EGP</span>
+                    <del *ngIf="product.offer && product.offer.value != 0" >{{ product['market'][0]['Market_Products']['Selling_price'] }} EGP</del>
+                    <span *ngIf="!product.offer">{{ product['market'][0]['Market_Products']['Selling_price'] }} EGP</span>
+                  </ion-card-subtitle>
+                  <ion-card-subtitle *ngIf="product.offer">
+                    {{product.offer.title}}
+                  </ion-card-subtitle>
+                  <ion-card-subtitle *ngIf="product.coupon" class="coupon">
+                    <span>خصم {{product.coupon.value}} <span *ngIf="product.coupon.type == 'percent'">%</span><span *ngIf="product.coupon.type == 'money'">جنيه</span> </span> باستخدام كوبون رقم {{product.coupon.code}}
+                  </ion-card-subtitle>
+                  <p>
+                    {{ product.description.substr(0 , 30) }}
+                  </p>
+                </ion-card-content>
+              </ion-col>
+              <ion-col size="1">
+                <a class="popover-btn" (click)="openSliding('product' + i , 'item' + i)">
+                  <ion-icon name="more"></ion-icon>
+                </a>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+
+          <ion-icon color="danger" *ngIf="product.status != 'active'" class="not-active-icon" name="eye-off"></ion-icon>
+        </ion-card>
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option color="danger" (click)="onDelete(product)">
+          <div class="text-center">
+            <ion-icon name="trash"></ion-icon>
+            <ion-label>حذف</ion-label>
+          </div>
+        </ion-item-option>
+        <ion-item-option color="success" [routerLink]="['/single-product-info/' + product.id]">
+          <div class="text-center">
+            <ion-icon name="create"></ion-icon>
+            <ion-label>تعديل</ion-label>
+          </div>
+        </ion-item-option>
+        <ion-item-option *ngIf="product.status == 'active'" color="primary"
+          (click)="onChangeStatus(product , 'not_active')">
+          <div class="text-center">
+            <ion-icon color="light" name="eye-off"></ion-icon>
+            <ion-label color="light">الغاء التفعيل</ion-label>
+          </div>
+        </ion-item-option>
+        <ion-item-option *ngIf="product.status == 'not_active' || product.status == 'pending' " color="success"
+          (click)="onChangeStatus(product , 'active')">
+          <div class="text-center">
+            <ion-icon color="light" name="eye"></ion-icon>
+            <ion-label color="light"> تفعيل </ion-label>
+          </div>
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

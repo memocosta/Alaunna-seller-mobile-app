@@ -1,0 +1,109 @@
+<ion-header>
+  <ion-toolbar color="grey">
+    <ion-buttons slot="start">
+      <ion-button color="success" (click)="onCreatePressed()">
+        <div class="all-icon">
+          <div class="icon-div">
+            <ion-icon slot="icon-only" name="checkmark"></ion-icon>
+          </div>
+          <label>تم</label>
+        </div>
+      </ion-button>
+    </ion-buttons>
+    <ion-title color="primary">{{CouponData.code}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()" color="danger">
+        <div class="all-icon">
+          <div class="icon-div">
+            <ion-icon slot="icon-only" name="close"></ion-icon>
+          </div>
+          <label>الغاء</label>
+        </div>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-row>
+    <ion-col size="12">
+      <ion-label>قيمة الخصم : </ion-label>
+    </ion-col>
+    <ion-col size="8">
+      <div class="new-ahmed" *ngIf="CouponData">
+        <ion-select placeholder="خصم {{CouponData.value}}%" *ngIf="CouponData.type=='percent'" [(ngModel)]="CouponData.value">
+          <ion-select-option value="2.5">خصم 2.5 %</ion-select-option>
+          <ion-select-option value="5">خصم 5 %</ion-select-option>
+          <ion-select-option value="7.5">خصم 7.5 %</ion-select-option>
+          <ion-select-option value="10">خصم 10 %</ion-select-option>
+          <ion-select-option value="12.5">خصم 12.5 %</ion-select-option>
+          <ion-select-option value="15">خصم 15 %</ion-select-option>
+          <ion-select-option value="17.5">خصم 17.5 %</ion-select-option>
+          <ion-select-option value="20">خصم 20 %</ion-select-option>
+          <ion-select-option value="22.5">خصم 22.5 %</ion-select-option>
+          <ion-select-option value="25">خصم 25 %</ion-select-option>
+          <ion-select-option value="30">خصم 30 %</ion-select-option>
+          <ion-select-option value="35">خصم 35 %</ion-select-option>
+          <ion-select-option value="40">خصم 40 %</ion-select-option>
+          <ion-select-option value="45">خصم 45 %</ion-select-option>
+          <ion-select-option value="50">خصم 50 %</ion-select-option>
+          <ion-select-option value="55">خصم 55 %</ion-select-option>
+          <ion-select-option value="60">خصم 60 %</ion-select-option>
+          <ion-select-option value="65">خصم 65 %</ion-select-option>
+          <ion-select-option value="70">خصم 70 %</ion-select-option>
+        </ion-select>
+        <ion-input placeholder="أكتب قيمة الخصم" type="number" *ngIf="CouponData.type=='money'" [(ngModel)]="CouponData.value"></ion-input>
+      </div>
+    </ion-col>
+    <ion-col size="4">
+      <div class="new-ahmed">
+        <ion-select placeholder="%" [(ngModel)]="CouponData.type">
+          <ion-select-option value="percent">%</ion-select-option>
+          <ion-select-option value="money">قيمة المبلغ</ion-select-option>
+        </ion-select>
+      </div>
+    </ion-col>
+  </ion-row>
+  <div class="new-div2">
+    <p>يطبق العرض علي:</p>
+    <div class="item item-trns">
+      <ion-checkbox [checked]="all" (ionChange)="onSelectAllChange($event)"></ion-checkbox>
+      <ion-label stacked>كل المنتجات</ion-label>
+    </div>
+    <div class="item item-trns">
+      <ion-checkbox [checked]="specific" (ionChange)="onSelectSpecificChange($event)"></ion-checkbox>
+      <ion-label>منتجات محددة</ion-label>
+      <ion-icon class="edit-icon" name="md-create" color="primary" (click)="showProductsModal()"></ion-icon>
+    </div>
+  </div>
+  <div class="new-div3">
+    <div>
+      <ion-label>تاريخ بداية الكوبون</ion-label>
+      <ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="CouponData.from"></ion-datetime>
+      <ion-icon name="md-calendar"></ion-icon>
+    </div>
+    <div>
+      <ion-label>تاريخ نهاية الكوبون</ion-label>
+      <ion-datetime displayFormat="DD MMM YYYY" [(ngModel)]="CouponData.to"></ion-datetime>
+      <ion-icon name="md-calendar"></ion-icon>
+    </div>
+  </div>
+  <div class="new-div3">
+    <ion-row>
+      <ion-col size="4">
+        <ion-label>عدد الكوبونات :</ion-label>
+      </ion-col>
+      <ion-col size="2">
+        <ion-input type="number" [(ngModel)]="CouponData.count"></ion-input>
+      </ion-col>
+    </ion-row>
+  </div>
+
+  <!-- <ion-button expand="block" class="add-btn" (click)="onCreatePressed()">
+    <ion-icon color="light" name="arrow-dropleft-circle"></ion-icon>
+    <ion-label color="light" padding>
+      إضافة
+    </ion-label>
+  </ion-button> -->
+  <br><br><br><br><br>
+</ion-content>

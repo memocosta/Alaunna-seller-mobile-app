@@ -1,0 +1,157 @@
+<ion-header>
+  <ion-toolbar color="grey">
+    <ion-title color="primary"> بيانات المتجر</ion-title>
+    <ion-row>
+      <ion-col size="1">
+        <div class="header-icon">
+          <!-- <ion-icon name="menu" color="primary"></ion-icon> -->
+          <ion-menu-button name="menu" color="primary"></ion-menu-button>
+
+        </div>
+      </ion-col>
+      <ion-col size="9">
+        <ion-searchbar placeholder="البحث"></ion-searchbar>
+      </ion-col>
+      <ion-col size="2">
+        <div class="header-icon" routerLink="/notifications">
+          <ion-badge *ngIf="countNotification > 0">{{countNotification}}</ion-badge>
+          <ion-icon name="notifications" color="primary"></ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding" class="add-store">
+  <ng-container class="images-continer">
+    <ion-label class="title-img">
+      خلفية المتجر
+    </ion-label>
+    <!-- <input type="file" name="file" id="file" class="fileInput" /> -->
+    <label class="addImg" (click)="OpenImage('cover')" *ngIf="!MarketData.cover">
+      <ion-icon name="photos"></ion-icon>
+    </label>
+    <img *ngIf="MarketData.cover &&  !MarketData.cover.action" class="addImg"
+      [src]="ImageBase + '/' + MarketData.cover.for + '/' + MarketData.cover.name" (click)="OpenImage('cover')">
+    <img *ngIf="MarketData.cover && (MarketData.cover.action == 'new' ||  MarketData.cover.action == 'new')"
+      [src]="'data:image/jpeg;base64,'  + MarketData.cover.base64" (click)="OpenImage('cover')">
+  </ng-container>
+
+  <div class="form-container">
+    <form [formGroup]="MarketForm" novalidate (submit)="onMarketCreate()">
+      <ion-list lines="none" color="none">
+        <ion-item color="none">
+          <ion-label position="stacked">اسم المتجر</ion-label>
+          <ion-input placeholder="إسم المتجر" type="text" class="ion-padding" name="name" formControlName="name"
+            [(ngModel)]="MarketData.name">
+          </ion-input>
+        </ion-item>
+        <div class="error-box"
+          *ngIf="MarketForm.controls['name'].hasError('required') && MarketForm.controls['name'].touched">
+          اسم المتجر مطلوب* </div>
+
+        <ion-item color="none">
+          <ion-label position="stacked">رقم الهاتف</ion-label>
+          <ion-input placeholder="رقم الهاتف" type="tel" class="ion-padding" name="phone" formControlName="phone"
+            [(ngModel)]="MarketData.phone"></ion-input>
+        </ion-item>
+
+        <div class="error-box"
+          *ngIf="MarketForm.controls['phone'].hasError('required') && MarketForm.controls['phone'].touched">
+          رقم هاتف المتجر مطلوب* </div>
+
+        <ion-item>
+          <ion-label position="stacked">الفئة</ion-label>
+          <ion-select placeholder="أختر تصنيف" name="marketcategory_id" formControlName="marketcategory_id"
+            [(ngModel)]="MarketData.marketcategory_id" multiple>
+            <ion-select-option *ngFor="let cat of MarketCategoies" [value]="cat.id" [disabled] ="usedCats.indexOf(cat.id) !== -1"> {{cat.name}} </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <div class="error-box"
+          *ngIf="MarketForm.controls['marketcategory_id'].hasError('required') && MarketForm.controls['marketcategory_id'].touched">
+          *الفئه مطلوبه </div>
+
+        <ion-item>
+          <ion-label position="stacked">المحافظة</ion-label>
+          <ion-select placeholder="المحافظة" name="Country_id" formControlName="Country_id"
+            [ngModel]="MarketData.Country_id" cancelText="الغاء" okText="تم" (ngModelChange)="onCountryChange($event)">
+            <ion-select-option *ngFor="let country of Countries" [value]="country.id"> {{ country.name }}
+            </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <div class="error-box"
+          *ngIf="MarketForm.controls['Country_id'].hasError('required') && MarketForm.controls['Country_id'].touched">
+          *المحافظه مطلوبه </div>
+
+        <ion-item>
+          <ion-label position="stacked">المنطقة</ion-label>
+          <ion-select placeholder="المنطقة" name="City_id" formControlName="City_id" [(ngModel)]="MarketData.City_id"
+            cancelText="الغاء" okText="تم">
+            <ion-select-option *ngFor="let city of FilterdCities" [value]="city.id"> {{city.name}} </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <div class="error-box"
+          *ngIf="MarketForm.controls['City_id'].hasError('required') && MarketForm.controls['City_id'].touched">
+          المدينه مطلوبه* </div>
+
+        <ion-item>
+          <ion-label position="stacked">تسليم الطلبات</ion-label>
+          <ion-select placeholder="أختر" name="delivery_type" formControlName="delivery_type"
+            [(ngModel)]="MarketData.delivery_type" cancelText="الغاء" okText="تم">
+            <ion-select-option value="delivery">توصيل فقط</ion-select-option>
+            <ion-select-option value="market">استلام من المتجر فقط</ion-select-option>
+            <ion-select-option value="all">الكل</ion-select-option>
+          </ion-select>
+        </ion-item>
+        <div class="error-box"
+          *ngIf="MarketForm.controls['delivery_type'].hasError('required') && MarketForm.controls['delivery_type'].touched">
+          نوع تسليم الطلبات مطلوبه* </div>
+
+        <ion-item color="none" *ngIf="MarketData.delivery_type == 'delivery' || MarketData.delivery_type == 'all'" >
+          <ion-label position="stacked">شروط التوصيل</ion-label>
+          <ion-input placeholder="شروط التوصيل" type="text" class="ion-padding" name="delivery_terms" formControlName="delivery_terms"
+            [(ngModel)]="MarketData.delivery_terms">
+          </ion-input>
+        </ion-item>
+
+        <ion-item color="none" *ngIf="MarketData.delivery_type == 'delivery' || MarketData.delivery_type == 'all'" >
+          <ion-label position="stacked">تكلفة التوصيل</ion-label>
+          <ion-input placeholder="تكلفة التوصيل" type="text" class="ion-padding" name="delivery_cost" formControlName="delivery_cost"
+            [(ngModel)]="MarketData.delivery_cost">
+          </ion-input>
+        </ion-item>
+
+        <ion-item color="none">
+          <ion-label position="stacked">العنوان</ion-label>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="12">
+                <ion-input placeholder="العنوان" type="text" class="ion-padding" name="address"
+                  formControlName="address" [(ngModel)]="MarketData.address"></ion-input>
+              </ion-col>
+              <ion-col size="2">
+                <ion-button color="light" class="icononly" (click)="onMapClicked()">
+                  <ion-icon slot="icon-only" name="pin"></ion-icon>
+                </ion-button>
+              </ion-col>
+              <ion-col size="12">
+                <ion-input placeholder="احداثيات الموقع" *ngIf="MarketData.lat" type="text" class="ion-padding"
+                  value="{{MarketData.lat + ', ' + MarketData.lng}}"></ion-input>
+                <ion-input placeholder="احداثيات الموقع" *ngIf="!MarketData.lat" type="text" class="ion-padding">
+                </ion-input>
+              </ion-col>
+            </ion-row>
+            <div class="error-box"
+              *ngIf="MarketForm.controls['address'].hasError('required') && MarketForm.controls['address'].touched">
+              العنوان مطلوب* </div>
+          </ion-grid>
+        </ion-item>
+        <ion-button expand="block" type="submit" class="add-btn">
+          <ion-icon color="light" name="arrow-dropleft-circle"></ion-icon>
+          <ion-label color="light" class="ion-padding">
+            تعديل
+          </ion-label>
+        </ion-button>
+      </ion-list>
+    </form>
+  </div>
+</ion-content>

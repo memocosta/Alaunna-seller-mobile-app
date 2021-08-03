@@ -1,0 +1,106 @@
+<ion-header>
+  <ion-toolbar color="grey">
+    <!-- <ion-title color="primary"> {{ProductData.name}} </ion-title> -->
+    <ion-row>
+      <ion-col size="1">
+        <div class="header-icon">
+          <ion-menu-button name="menu" color="primary"></ion-menu-button>
+        </div>
+      </ion-col>
+      <ion-col size="9">
+        <ion-searchbar placeholder="البحث"></ion-searchbar>
+      </ion-col>
+      <ion-col size="2">
+        <div class="header-icon" routerLink="/notifications">
+          <ion-badge *ngIf="countNotification > 0">{{countNotification}}</ion-badge>
+          <ion-icon name="notifications" color="primary"></ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="add-prodInfo-page">
+  <h6 class="disabled-step">
+    <ion-icon *ngIf="ProductData.images && ProductData.images.length" name="checkmark-circle"></ion-icon>
+    <ion-label>
+      صور المنتج
+    </ion-label>
+  </h6>
+  <ion-slides pager="false" [options]="slideOpts">
+    <ion-slide *ngFor="let img of ProductData.images; let i = index">
+      <img *ngIf="!img.action" [src]="ImageBase + '/' + img.for + '/big/' + img.name" (click)="onImageClicked(img)">
+      <img *ngIf="img.action == 'edited' || img.action == 'new'" [src]="'data:image/jpeg;base64,' + img.base64"
+        (click)="onImageClicked(img)">
+      <!-- <ion-button class="remove-button" color="light" > 
+              <ion-icon name="trash" ></ion-icon>
+          </ion-button> -->
+    </ion-slide>
+    <ion-slide>
+      <img class="add-new-image" src="./assets/img/new.png" (click)="onImageClicked('')" > 
+    </ion-slide>
+  </ion-slides>
+  <h6>
+    <ion-icon name="arrow-forward"></ion-icon>
+    <ion-label>
+      معلومات المنتج
+    </ion-label>
+  </h6>
+  <form [formGroup]="ProductForm" novalidate (submit)="onEditClicked()">
+    <div class="form-container">
+      <ion-list lines="none" color="none">
+        <ion-item color="none">
+          <ion-label position="stacked">اسم المنتج</ion-label>
+          <ion-input placeholder="إسم المنتج" type="text" name="name" formControlName="name"
+            [(ngModel)]="ProductData.name"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">التصنيف</ion-label>
+          <ion-select placeholder="أختر تصنيف" name="category_id" formControlName="category_id"
+            [(ngModel)]="ProductData.category_id" (ionChange)="catChange(ProductData.category_id)" >
+            <ion-select-option *ngFor="let cat of categories" [value]="cat.id"> {{cat.name}} </ion-select-option>
+          </ion-select>
+        </ion-item>
+        <ion-item color="none" (click)="onCategoryClicked()">
+          <ion-label position="stacked"> التصنيف , الفئه , الفئه الفرعيه </ion-label>
+          <ion-input placeholder="احذيه, احذيه حريمي ,كعب عالي" type="text" name="cat_sub_title"
+            formControlName="cat_sub_title" [(ngModel)]="cat_sub_title"></ion-input>
+        </ion-item>
+        <ion-item color="none">
+          <ion-label position="stacked">السعر</ion-label>
+          <ion-input placeholder="400" type="number" name="Selling_price" formControlName="Selling_price"
+            [(ngModel)]="ProductData['market'][0]['Market_Products'].Selling_price"></ion-input>
+        </ion-item>
+        <!-- <ion-item color="none">
+          <ion-label position="stacked">السعر بعد الخصم</ion-label>
+          <ion-input placeholder="400" type="number" name="Price_after" formControlName="Price_after"
+            [(ngModel)]="ProductData['market'][0]['Market_Products'].Price_after"></ion-input>
+        </ion-item> -->
+        <ion-item color="none">
+          <ion-label position="stacked">وصف المنتج</ion-label>
+          <ion-textarea rows="5" placeholder="أدخل وصف المنتج هنا ..." name="description" formControlName="description"
+            [(ngModel)]="ProductData.description"></ion-textarea>
+        </ion-item>
+
+        <ion-item color="none" class="options-button" (click)="OnCustomizeClicked()">
+            <ion-button color="light" slot="end">
+              <ion-icon slot="end" name="arrow-forward"></ion-icon>
+              اختياري
+            </ion-button>
+            <ion-text>
+              تخصيص المنتج
+            </ion-text>
+          </ion-item>
+
+        <ion-button expand="block" class="add-btn" type="submit">
+          <ion-icon color="light" name="arrow-dropleft-circle"></ion-icon>
+          <ion-label color="light" padding>
+            تعديل الان
+          </ion-label>
+        </ion-button>
+
+      </ion-list>
+    </div>
+  </form>
+</ion-content>

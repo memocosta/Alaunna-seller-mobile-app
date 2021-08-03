@@ -1,0 +1,7 @@
+{
+  "name": "alauuna",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

@@ -1,0 +1,113 @@
+<ion-header *ngIf="OfferData">
+  <ion-toolbar color="primary">
+    
+    <ion-row>
+      <ion-col size="2">
+        <div class="header-icon">
+          <ion-menu-button name="menu" color="light"></ion-menu-button>
+        </div>
+      </ion-col>
+      <ion-col size="8">
+        <ion-title color="light" >{{OfferData.title}}</ion-title>
+      </ion-col>
+      <ion-col size="2">
+        <div class="header-icon left-icons">
+          <ion-icon name="md-create" color="light" (click)="editOffer()"></ion-icon>
+        </div>
+      </ion-col>
+      <!-- <ion-col size="1">
+        <div class="header-icon left-icons">
+          <ion-icon name="more" color="light"></ion-icon>
+        </div>
+      </ion-col> -->
+    </ion-row>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding *ngIf="OfferData">
+  <ion-row>
+    <ion-col size="8">
+    </ion-col>
+    <ion-col size="4">
+    </ion-col>
+  </ion-row>
+  <div class="new-div2">
+    <p *ngIf="OfferData.value>0">قيمة العرض : <span padding-right > {{OfferData.value}}% </span></p>
+    <p *ngIf="OfferData.value==0">قيمة العرض : <span padding-right > عرض خاص </span></p>
+    <p>يطبق العرض على : 
+      <span *ngIf="OfferData.all == 0">منتجات محددة</span>
+      <span *ngIf="OfferData.all == 1">كل المنتجات</span>
+    </p>
+  </div>
+  <div class="new-div3">
+    <div>
+      <ion-label>تاريخ بداية العرض</ion-label>
+      <ion-input  disabled  value="{{OfferData.from | date: 'dd/MM/yyyy'}}"></ion-input>
+      <ion-icon name="md-calendar"></ion-icon>
+    </div>
+    <div>
+      <ion-label>تاريخ نهاية العرض</ion-label>
+      <ion-input  disabled *ngIf="OfferData" value="{{OfferData.to | date: 'dd/MM/yyyy'}}"></ion-input>
+      <ion-icon name="md-calendar"></ion-icon>
+    </div>
+  </div>
+  
+  <ion-list class="item item-trns" lines="none">
+    <ion-item-sliding color="none">
+      <ion-item color="none">
+        <ion-card color="light" class="desc">
+          <ion-grid>
+            <ion-row>
+              
+              <ion-col size="8">
+                <ion-card-content>
+                  <p [innerHtml]="OfferData.description">
+                    
+                  </p>
+                </ion-card-content>
+              </ion-col>
+              <ion-col size="4" *ngIf="!OfferData.image">
+                <img src="assets/img/default.png">
+              </ion-col>
+              <ion-col size="4" *ngIf="OfferData.image">
+                <img [src]="ImageBase + '/' + OfferData.image.for  + '/' + OfferData.image.name"
+                  [alt]="OfferData.image.alt">
+              </ion-col>
+              <!-- <ion-col size="1">
+                <a class="popover-btn" (click)="settingsPopover()">
+                  <ion-icon name="more"></ion-icon>
+                </a>
+              </ion-col> -->
+            </ion-row>
+          </ion-grid>
+        </ion-card>
+      </ion-item>
+    </ion-item-sliding>
+  </ion-list>
+  <ion-row class="buttons-row">
+    <ion-col size="6" text-center>
+      <ion-buttons end *ngIf="OfferData.status != 'active'">
+        <ion-button expand="block" shape="round" fill="solid" color="success" (click)="changeOfferStatus('active')">
+          <ion-icon name="md-eye"></ion-icon>
+          تفعيل
+        </ion-button>
+      </ion-buttons>
+      <ion-buttons end *ngIf="OfferData.status == 'active'">
+        <ion-button expand="block" shape="round" fill="solid" color="warning" (click)="changeOfferStatus('not_active')">
+          <ion-icon name="md-eye-off"></ion-icon>
+          إيقاف
+        </ion-button>
+      </ion-buttons>
+    </ion-col>
+    <ion-col size="6" text-center>
+      <ion-buttons end>
+        <ion-button expand="block" shape="round" fill="solid" color="danger" (click)="deleteOffer()">
+          <ion-icon name="close"></ion-icon>
+          ألغاء
+        </ion-button>
+      </ion-buttons>
+    </ion-col>
+  </ion-row>
+
+</ion-content>

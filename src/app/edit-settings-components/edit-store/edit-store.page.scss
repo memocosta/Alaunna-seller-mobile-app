@@ -1,0 +1,33 @@
+ion-button{
+    color: #fff !important;
+    text-align:right;
+    height: 48px;
+    width: 100%;
+}
+.trash{
+    position: absolute !important;
+    z-index: 2 !important;
+    left: 0 !important;
+    cursor: pointer;
+}
+ion-icon{
+    padding: 10px;
+    font-size: 28px;
+}
+.text-d{
+    font-weight: 600;
+    font-size: large;
+}
+.text-m{
+font-weight: 600;
+font-size: large;
+}
+.text{
+    color: #fff;
+    margin-left: auto;
+    color: #fff !important;
+    font-size: 18px;
+}
+section{
+    margin-top: 200px;
+}

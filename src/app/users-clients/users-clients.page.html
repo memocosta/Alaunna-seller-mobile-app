@@ -1,0 +1,94 @@
+<ion-header>
+  <ion-toolbar color="grey">
+    <ion-buttons slot="start">
+      <ion-button color="success" (click)="onDonePreseed()">
+        <div class="all-icon">
+          <div class="icon-div">
+            <ion-icon slot="icon-only" name="checkmark"></ion-icon>
+          </div>
+          <label>تم</label>
+        </div>
+      </ion-button>
+    </ion-buttons>
+    <ion-title color="primary">انشاء طلب لعميل</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="dismissModal()" color="danger">
+        <div class="all-icon">
+          <div class="icon-div">
+            <ion-icon slot="icon-only" name="close"></ion-icon>
+          </div>
+          <label>الغاء</label>
+        </div>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="myproducts">
+  <ion-list class="item item-trns" lines="none">
+
+    <ion-radio-group>
+      <ion-button (click)="new_customer()" color="success">
+        <ion-icon name="add"></ion-icon>
+        اضافة عميل جديد
+      </ion-button>
+      <ion-item-sliding *ngFor="let client of clients; index as i" [id]="'product'+i" #Product color="none">
+        <ion-item color="none" [id]="'item' + i">
+          <ion-card color="light">
+            <ion-grid>
+              <ion-row>
+                <ion-col size="1">
+                  <ion-icon name="person"></ion-icon>
+                </ion-col>
+                <ion-col size="10">
+                  <ion-card-content>
+                    <ion-label>
+                      {{client.name}}
+                      <ion-text color="secondary" *ngIf="client.Country">
+                        <p>{{client.Country.name}}</p>
+                      </ion-text>
+                    </ion-label>
+
+                  </ion-card-content>
+                </ion-col>
+                <ion-col size="1">
+                  <a class="popover-btn check-btn">
+                    <ion-radio (click)="onSelectClientChange(client)"></ion-radio>
+                  </a>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card>
+        </ion-item>
+
+      </ion-item-sliding>
+
+      <ion-item-sliding *ngFor="let client of contacts; index as i" [id]="'product'+i" #Product color="none">
+        <ion-item color="none" [id]="'item' + i">
+          <ion-card color="light">
+            <ion-grid>
+              <ion-row>
+                <ion-col size="1">
+                  <ion-icon name="person"></ion-icon>
+                </ion-col>
+                <ion-col size="10">
+                  <ion-card-content>
+                    <ion-label>
+                      {{client.name}}
+                    </ion-label>
+                  </ion-card-content>
+                </ion-col>
+                <ion-col size="1">
+                  <a class="popover-btn check-btn">
+                    <ion-radio (click)="onSelectContactChange(client)"></ion-radio>
+                  </a>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+          </ion-card>
+        </ion-item>
+
+      </ion-item-sliding>
+    </ion-radio-group>
+  </ion-list>
+</ion-content>

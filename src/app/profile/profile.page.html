@@ -1,0 +1,348 @@
+<ion-header>
+  <ion-toolbar color="grey">
+    <ion-title color="primary"> {{ UserData.name }} </ion-title>
+    <ion-row>
+      <ion-col size="1">
+        <div class="header-icon">
+          <!-- <ion-icon name="menu" color="primary"></ion-icon> -->
+          <ion-menu-button name="menu" color="primary"></ion-menu-button>
+        </div>
+      </ion-col>
+      <ion-col size="9">
+        <ion-searchbar placeholder="البحث"></ion-searchbar>
+      </ion-col>
+      <ion-col size="2">
+        <div class="header-icon" routerLink="/notifications">
+          <ion-badge *ngIf="countNotification > 0">{{countNotification}}</ion-badge>
+          <ion-icon name="notifications" color="primary"></ion-icon>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding class="profile">
+  <!-- <ion-grid>
+    <ion-row>
+      <ion-col size="2">
+        <img class="UserImage" *ngIf="!UserData.Image" src="./assets/img/userPlaceholder.png">
+        <img class="UserImage" *ngIf="UserData.Image"
+          [src]="ImageBase + '/' + UserData.Image.for + '/' + UserData.Image.name">
+      </ion-col>
+      <ion-col>
+        <h6 class="profile-name">
+          {{ UserData.name }}
+        </h6>
+      </ion-col>
+    </ion-row>
+  </ion-grid> -->
+  <div class="page-content">
+    <ion-card *ngIf="block1">
+      <ion-item lines="none">
+        <ion-label color="primary">
+          إسم صاحب المتجر
+        </ion-label>
+        <ion-label class="name" style="font-size: .8em;">
+          {{ UserData.name }}
+        </ion-label>
+        <ion-icon name="create" slot="end" color="primary" (click)="block1 = !block1"></ion-icon>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label color="primary">
+          البريد الالكتروني
+        </ion-label>
+        <ion-label class="name" style="font-size: .8em;">
+          {{ UserData.email }}
+        </ion-label>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label color="primary">
+          رقم الهاتف
+        </ion-label>
+        <ion-label class="name" style="font-size: .8em;">
+          {{ UserData.phone }}
+        </ion-label>
+      </ion-item>
+    </ion-card>
+    <ion-card *ngIf="!block1">
+      <ion-list lines="none">
+        <ion-item>
+          <ion-label position="stacked">إسم صاحب المتجر</ion-label>
+          <ion-input type="text" [(ngModel)]="UserData.name"></ion-input>
+        </ion-item>
+
+
+        <ion-item>
+          <ion-label position="stacked">البريد الالكتروني</ion-label>
+          <ion-input type="email" [(ngModel)]="UserData.email"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">رقم الهاتف</ion-label>
+          <ion-input type="tel" [(ngModel)]="UserData.phone"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked"> * كلمه المرور الحالية </ion-label>
+          <ion-input placeholder="xxxxxxxxx" type="password" [(ngModel)]="UserData.password"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">(أختياري) كلمه المرور الجديدة </ion-label>
+          <ion-input placeholder="xxxxxxxxx" type="password" [(ngModel)]="UserData.newPassword"></ion-input>
+        </ion-item>
+
+        <ion-button expand="block" class="sign-btn" (click)="onUserEditClicked()">
+          <ion-label color="light" class="ion-padding"> تعديل الان </ion-label>
+        </ion-button>
+
+      </ion-list>
+    </ion-card>
+
+    <ion-card *ngIf="block2">
+      <ion-item lines="none">
+        <ion-label color="primary" *ngIf="!MarketData.linkedin" style="font-size: .8em;">
+          أضف لينكد ان الخاص بك
+        </ion-label>
+        <ion-label class="name" style="font-size: .8em;" *ngIf="MarketData.linkedin">
+          {{ MarketData.linkedin }}
+        </ion-label>
+        <ion-icon name="create" slot="end" color="primary" (click)="block2 = !block2"></ion-icon>
+        <ion-icon name="logo-linkedin" slot="start" color="primary"></ion-icon>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label color="primary" *ngIf="!MarketData.facebook" style="font-size: .8em;">
+          أضف الفيس بوك الخاص بك
+        </ion-label>
+        <ion-label class="name" style="font-size: .8em;" *ngIf="MarketData.facebook">
+          {{ MarketData.facebook }}
+        </ion-label>
+        <ion-icon name="logo-facebook" slot="start" color="primary"></ion-icon>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label color="primary" *ngIf="!MarketData.twitter" style="font-size: .8em;">
+          أضف تويتر الخاص بك
+        </ion-label>
+        <ion-label class="name" style="font-size: .8em;" *ngIf="MarketData.twitter">
+          {{ MarketData.twitter }}
+        </ion-label>
+        <ion-icon name="logo-twitter" slot="start" color="primary"></ion-icon>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label color="primary" *ngIf="!MarketData.instgram" style="font-size: .8em;">
+          أضف انستجرام الخاص بك
+        </ion-label>
+        <ion-label class="name" style="font-size: .8em;" *ngIf="MarketData.instgram">
+          {{ MarketData.instgram }}
+        </ion-label>
+        <ion-icon name="logo-instagram" slot="start" color="primary"></ion-icon>
+      </ion-item>
+    </ion-card>
+
+    <ion-card *ngIf="!block2">
+      <ion-list lines="none">
+        <ion-item>
+          <ion-label position="stacked">لينكد ان</ion-label>
+          <ion-input placeholder=" أضف لينكد ان الخاص بك" type="text" [(ngModel)]="MarketData.linkedin"></ion-input>
+        </ion-item>
+
+
+        <ion-item>
+          <ion-label position="stacked">فيس بوك</ion-label>
+          <ion-input placeholder=" أضف فيس بوك الخاص بك" type="text" [(ngModel)]="MarketData.facebook"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">تويتر</ion-label>
+          <ion-input placeholder=" أضف تويتر الخاص بك" type="text" [(ngModel)]="MarketData.twitter"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="stacked">انستجرام</ion-label>
+          <ion-input placeholder=" أضف انستجرام الخاص بك" type="text" [(ngModel)]="MarketData.instgram"></ion-input>
+        </ion-item>
+
+
+        <ion-button expand="block" class="sign-btn" (click)="onMarketEditClicked()">
+          <ion-label color="light" class="ion-padding"> تعديل الان </ion-label>
+        </ion-button>
+
+      </ion-list>
+    </ion-card>
+
+    <ion-card *ngIf="block3">
+      <ion-item lines="none">
+        <ion-label color="primary">
+          أيام العمل
+        </ion-label>
+        <ion-label class="name" style="font-size: .8em;">
+          أضف أيام العمل
+        </ion-label>
+        <ion-icon name="create" slot="end" color="primary" (click)="block3 = !block3"></ion-icon>
+      </ion-item>
+      <ion-item lines="none">
+        <ion-label color="primary">
+          التوقيت
+        </ion-label>
+        <ion-label class="name" style="font-size: .8em;">
+          أضف مواعيد العمل
+        </ion-label>
+      </ion-item>
+    </ion-card>
+    <ion-card *ngIf="!block3">
+      <ion-list lines="none" class="date-form">
+        <ion-item class="from-to">
+          <p>الأحد</p>
+          <ion-item >
+            <ion-label>من</ion-label>
+            <ion-datetime  displayFormat="H" [(ngModel)]="MarketData.oppning_hours.Sunday.from"></ion-datetime>
+            <ion-icon name="md-calendar"></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-label>الي</ion-label>
+            <ion-datetime  displayFormat="H" [(ngModel)]="MarketData.oppning_hours.Sunday.to"></ion-datetime>
+            <ion-icon name="md-calendar"></ion-icon>
+          </ion-item>
+        </ion-item>
+        <ion-item>
+          <p>الاثنين</p>
+          <ion-item>
+            <ion-label>من</ion-label>
+            <ion-datetime  displayFormat="H" [(ngModel)]="MarketData.oppning_hours.Monday.from"></ion-datetime>
+            <ion-icon name="md-calendar"></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-label>الي</ion-label>
+            <ion-datetime  displayFormat="H" [(ngModel)]="MarketData.oppning_hours.Monday.to"></ion-datetime>
+            <ion-icon name="md-calendar"></ion-icon>
+          </ion-item>
+        </ion-item>
+        <ion-item>
+          <p>الثلاثاء</p>
+          <ion-item>
+            <ion-label>من</ion-label>
+            <ion-datetime  displayFormat="H" [(ngModel)]="MarketData.oppning_hours.Tuesday.from"></ion-datetime>
+            <ion-icon name="md-calendar"></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-label>الي</ion-label>
+            <ion-datetime  displayFormat="H" [(ngModel)]="MarketData.oppning_hours.Tuesday.to"></ion-datetime>
+            <ion-icon name="md-calendar"></ion-icon>
+          </ion-item>
+        </ion-item>
+        <ion-item>
+          <p>الاربعاء</p>
+          <ion-item>
+            <ion-label>من</ion-label>
+            <ion-datetime  displayFormat="H" [(ngModel)]="MarketData.oppning_hours.Wednesday.from"></ion-datetime>
+            <ion-icon name="md-calendar"></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-label>الي</ion-label>
+            <ion-datetime  displayFormat="H" [(ngModel)]="MarketData.oppning_hours.Wednesday.to"></ion-datetime>
+            <ion-icon name="md-calendar"></ion-icon>
+          </ion-item>
+        </ion-item>
+        <ion-item>
+          <p>الخميس</p>
+          <ion-item>
+            <ion-label>من</ion-label>
+            <ion-datetime  displayFormat="H" [(ngModel)]="MarketData.oppning_hours.Thursday.from"></ion-datetime>
+            <ion-icon name="md-calendar"></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-label>الي</ion-label>
+            <ion-datetime  displayFormat="H" [(ngModel)]="MarketData.oppning_hours.Thursday.to"></ion-datetime>
+            <ion-icon name="md-calendar"></ion-icon>
+          </ion-item>
+        </ion-item>
+        <ion-item>
+          <p>الجمعة</p>
+          <ion-item>
+            <ion-label>من</ion-label>
+            <ion-datetime  displayFormat="H" [(ngModel)]="MarketData.oppning_hours.Friday.from"></ion-datetime>
+            <ion-icon name="md-calendar"></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-label>الي</ion-label>
+            <ion-datetime  displayFormat="H" [(ngModel)]="MarketData.oppning_hours.Friday.to"></ion-datetime>
+            <ion-icon name="md-calendar"></ion-icon>
+          </ion-item>
+        </ion-item>
+        <ion-item>
+          <p>السبت</p>
+          <ion-item>
+            <ion-label>من</ion-label>
+            <ion-datetime  displayFormat="H" [(ngModel)]="MarketData.oppning_hours.Saturday.from"></ion-datetime>
+            <ion-icon name="md-calendar"></ion-icon>
+          </ion-item>
+          <ion-item>
+            <ion-label>الي</ion-label>
+            <ion-datetime  displayFormat="H" [(ngModel)]="MarketData.oppning_hours.Saturday.to"></ion-datetime>
+            <ion-icon name="md-calendar"></ion-icon>
+          </ion-item>
+        </ion-item>
+
+        <ion-button expand="block" class="sign-btn" (click)="onMarketEditClicked()">
+          <ion-label color="light" class="ion-padding"> تعديل الان </ion-label>
+        </ion-button>
+
+      </ion-list>
+    </ion-card>
+
+    <ion-card *ngIf="block4">
+      <ion-item lines="none">
+        <ion-label color="primary">
+          تفاصيل المتجر
+        </ion-label>
+        <ion-label class="name" style="font-size: .8em;" *ngIf="!MarketData.description">
+          تحدث عن متجرك
+        </ion-label>
+        <ion-label class="name" style="font-size: .8em;" *ngIf="MarketData.description">
+          {{MarketData.description}}
+        </ion-label>
+        <ion-icon name="create" slot="end" color="primary" (click)="block4 = !block4"></ion-icon>
+      </ion-item>
+    </ion-card>
+    <ion-card *ngIf="!block4">
+      <ion-list lines="none">
+        <ion-item>
+          <ion-label position="stacked">تحدث عن متجرك</ion-label>
+          <ion-textarea rows="6" cols="20" placeholder="يتم كتابةالوصف هنا ..." [(ngModel)]="MarketData.description">
+          </ion-textarea>
+        </ion-item>
+
+        <ion-button expand="block" class="sign-btn" (click)="onMarketEditClicked()">
+          <ion-label color="light" class="ion-padding"> تعديل الان </ion-label>
+        </ion-button>
+
+      </ion-list>
+    </ion-card>
+
+
+
+  </div>
+</ion-content>
+<!---->
+<ion-content>
+  <ion-list lines="none" style="height: 338px;">
+    <ion-item>
+      <ion-label> استقبال الاشعارات </ion-label>
+      <ion-toggle mode="ios" [(ngModel)]="settingData['recive_notification']"></ion-toggle>
+    </ion-item>
+    <hr>
+    <ion-item>
+      <ion-label> الوصول للموقع </ion-label>
+      <ion-toggle mode="ios" [(ngModel)]="settingData['location']"></ion-toggle>
+    </ion-item>
+    <hr>
+    <ion-item>
+      <ion-label> الوصول للكاميرا </ion-label>
+      <ion-toggle mode="ios" [(ngModel)]="settingData['camera']"></ion-toggle>
+    </ion-item>
+    <hr>
+    <ion-item>
+      <ion-label> الوصول لمعرض الصور </ion-label>
+      <ion-toggle mode="ios" [(ngModel)]="settingData['gallary']"></ion-toggle>
+    </ion-item>
+  </ion-list>
+</ion-content>

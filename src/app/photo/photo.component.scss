@@ -1,0 +1,13 @@
+.image-new {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.close-btn {
+    position: absolute;
+    font-size: xx-large;
+    right: 10px;
+    top: 10px;
+    color: #7d2468;
+    z-index: 1;
+}
